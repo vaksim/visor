@@ -7,7 +7,7 @@ include ("lib/page.php");
 //ffff
 $Page = new Page();
 $Page->head(_PRG_SHORT_NAME);
-$Page->body("main");
-$Page->foot();
+$PAge->Body("main");
+//$Page->foot();
 
 ?>

@@ -29,12 +29,15 @@ class Page
       switch (AuthUser(@$_POST["LoginUserName"],@$_POST["LoginPass"]))
 	{
 	case 'first';
-	echo 'First'."\n";
+	//	echo 'First'."\n";
 	break;
 
 	case 'error';
-	include "../pages/auth_error.php";
+	include "auth_error.php";
 	break;
+
+	default:
+	  echo "Not!!!";
 	}
       /*      if (AuthUser(@$_POST["LoginUserName"],@$_POST["LoginPass"]) == 'first')
 	{

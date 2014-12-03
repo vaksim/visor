@@ -1,3 +1,4 @@
+
 <?php
 //Файл содержит функции для отображения панели регистрации.
 
@@ -25,18 +26,18 @@ function AuthUser($LoginUserName, $LoginPass)
 	
 	if (CheckBaseUser($LoginUserName, $LoginPass))
 	  {
-	    PhitAuthValid($LoggedAs,$LoginUserName);  //$_POST["UserName"]);
+	    AuthMenuValid($LoggedAs,$LoginUserName);  //$_POST["UserName"]);
 	    $AuthStatus = 'valid';
 	  }else{
-	  PrintAuthUserMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+	  AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
 	  //echo "<br>User ".$LoginUserName." not valid.<br>\n";
-	  echo 'Not first'."\n";
+	  //	  echo 'Not first'."\n";
 	  $AuthStatus = 'error';
 	}
       }
     else
       {
-	PrintAuthUserMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+	AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
 	
 	$AuthStatus = 'first';
       }
@@ -50,30 +51,32 @@ function PhitRegValid($RegValidValue,$UserName)
 
 function CheckBaseUser($LoginUserName, $LoginPass)
 {
-  $Valid = false;
+  $Valid = true;
   return $Valid;
 }
 
-function PrintAuthUserMenu($Action, $ValBut)
+function AuthMenuValid($LoggedAs,$LoginUserName)
 {
-  //  echo "<hr>";
-  echo "<div class=\"AuthMenu\">\n";
-  echo "<table align=\"center\">\n";
-  echo " <tr>\n";
-  echo "  <td>\n";
-  echo "<form method=\"POST\" action=\"".$Action."\">\n";
-  echo "  Имя:\n";
-  echo "<input type=\"text\" name=\"LoginUserName\">\n";
-  echo "  Пароль:\n";
-  echo "<input type=\"text\" name=\"LoginPass\">\n";
-  echo "<input type=\"submit\" name=\"RegBut\" value=\"".$ValBut."\">\n";
-  echo "</form>\n";
-  echo "  </td>\n";
-  echo " </tr>\n";
-  echo "</table>\n";
-  echo "</div>\n";
-  //  echo "<br><hr>\n";
+  echo 'AuthMenuValid';
+}
 
+function AuthMenu($Action, $ValBut)
+{
+  echo '<div class="AuthMenu">'."\n";
+  echo '<table align="center">'."\n";
+  echo ' <tr>'."\n";
+  echo '  <td>'."\n";
+  echo '   <form method="POST" action="'.$Action.'">'."\n";
+  echo '    Имя:'."\n";
+  echo '    <input type="text" name="LoginUserName">'."\n";
+  echo '    Пароль:'."\n";
+  echo '    <input type="text" name="LoginPass">'."\n";
+  echo '    <input type="submit" name="RegBut" value="'.$ValBut.'">'."\n";
+  echo '   </form>'."\n";
+  echo '  </td>'."\n";
+  echo ' </tr>'."\n";
+  echo '</table>'."\n";
+  echo '</div>'."\n";
 }
 
 ?>
