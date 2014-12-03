@@ -1,5 +1,6 @@
 <?php
 
+
 class Page
   {
     function Page()//$PageArray)
@@ -16,6 +17,7 @@ class Page
       echo '  content="text/html; charset=utf-8"',"\n";
       echo '  http-equiv="content-type">',"\n";
       echo ' <title>'.$ProgShortName.'</title>',"\n";
+      echo " <link rel=\"stylesheet\" type=\"text/css\" href=\"main.css\">\n";
       echo '</head>',"\n";
     }
 
@@ -24,7 +26,24 @@ class Page
       echo '<body>',"\n";
       $this->PrgHead();
       include "reg.php";
-      if (!AuthUser(@$_POST["LoginUserName"],@$_POST["LoginPass"])){echo "Ok!!!<br>";}
+      switch (AuthUser(@$_POST["LoginUserName"],@$_POST["LoginPass"]))
+	{
+	case 'first';
+	echo 'First'."\n";
+	break;
+
+	case 'error';
+	include "../pages/auth_error.php";
+	break;
+	}
+      /*      if (AuthUser(@$_POST["LoginUserName"],@$_POST["LoginPass"]) == 'first')
+	{
+	  echo 'First'."\n";
+	  echo "Ok!!!<br>";
+	} else {
+	include 'auth_error.php';
+      }
+      */
 
       /*      //include ("page/reg.php");
       if ($_SERVER['REQUEST_METHOD'] == 'POST')

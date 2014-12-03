@@ -26,19 +26,21 @@ function AuthUser($LoginUserName, $LoginPass)
 	if (CheckBaseUser($LoginUserName, $LoginPass))
 	  {
 	    PhitAuthValid($LoggedAs,$LoginUserName);  //$_POST["UserName"]);
-	    $Valid = true;
+	    $AuthStatus = 'valid';
 	  }else{
-	  PhitAuthUser($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
-	  echo "<br>User ".$LoginUserName." not valid.<br>\n";
-	  $Valid = false;
+	  PrintAuthUserMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+	  //echo "<br>User ".$LoginUserName." not valid.<br>\n";
+	  echo 'Not first'."\n";
+	  $AuthStatus = 'error';
 	}
       }
     else
       {
-	PhitAuthUser($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
-	$Valid = false;
+	PrintAuthUserMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+	
+	$AuthStatus = 'first';
       }
-    return $Valid;
+    return $AuthStatus;
   }
 
 function PhitRegValid($RegValidValue,$UserName)
@@ -52,29 +54,25 @@ function CheckBaseUser($LoginUserName, $LoginPass)
   return $Valid;
 }
 
-function PhitAuthUser($Action, $ValBut)
+function PrintAuthUserMenu($Action, $ValBut)
 {
-  echo "<hr>";
-
-  echo "<table border=\"1\" align=\"center\">\n";
+  //  echo "<hr>";
+  echo "<div class=\"AuthMenu\">\n";
+  echo "<table align=\"center\">\n";
   echo " <tr>\n";
+  echo "  <td>\n";
   echo "<form method=\"POST\" action=\"".$Action."\">\n";
-  echo "  <td>Имя:</td>\n";
-  echo "  <td>\n";
+  echo "  Имя:\n";
   echo "<input type=\"text\" name=\"LoginUserName\">\n";
-  echo "  </td>\n";
-  echo "  <td>Пароль:</td>\n";
-  echo "  <td>\n";
+  echo "  Пароль:\n";
   echo "<input type=\"text\" name=\"LoginPass\">\n";
-  echo "  </td>\n";
-  echo "  <td>\n";
   echo "<input type=\"submit\" name=\"RegBut\" value=\"".$ValBut."\">\n";
   echo "</form>\n";
   echo "  </td>\n";
-  echo "   </form>\n";
   echo " </tr>\n";
   echo "</table>\n";
-  echo "<br><hr>\n";
+  echo "</div>\n";
+  //  echo "<br><hr>\n";
 
 }
 
