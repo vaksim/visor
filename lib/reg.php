@@ -1,14 +1,22 @@
-
 <?php
 //Файл содержит функции для отображения панели регистрации.
 
-function AuthValidArray()
+function Test()
 {
+    echo 'test';
+    //  if (<field "what">) { <field "do it"> } else { <field "else do it"> } <endpoint>
+//    if
+        
+}
 
+function AuthValidArray()
+
+{
   $FuncArray["UserName"] = $_POST["UserName"];
   $FuncArray["RegValidValue"] = _REG_VALID_VALUE;
   return $FuncArray;
 }
+
 function AuthArray()
 {
 
@@ -19,30 +27,30 @@ function AuthArray()
 
 function AuthUser($LoginUserName, $LoginPass)
 //Регистрация пользователя
-  {
+{
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
-      {
-	//Проверяем пользователя по базе
+        {
+            //Проверяем пользователя по базе
 	
-	if (CheckBaseUser($LoginUserName, $LoginPass))
-	  {
-	    AuthMenuValid($LoggedAs,$LoginUserName);  //$_POST["UserName"]);
-	    $AuthStatus = 'valid';
-	  }else{
-	  AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
-	  //echo "<br>User ".$LoginUserName." not valid.<br>\n";
-	  //	  echo 'Not first'."\n";
-	  $AuthStatus = 'error';
-	}
-      }
+            if (CheckBaseUser($LoginUserName, $LoginPass))
+                {
+                    AuthMenuValid($LoggedAs,$LoginUserName);  //$_POST["UserName"]);
+                    $AuthStatus = 'valid';
+                }else{
+                AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+                //echo "<br>User ".$LoginUserName." not valid.<br>\n";
+                //	  echo 'Not first'."\n";
+                $AuthStatus = 'error';
+            }
+        }
     else
-      {
-	AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+        {
+            AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
 	
-	$AuthStatus = 'first';
-      }
+            $AuthStatus = 'first';
+        }
     return $AuthStatus;
-  }
+}
 
 function PhitRegValid($RegValidValue,$UserName)
 {
@@ -51,7 +59,7 @@ function PhitRegValid($RegValidValue,$UserName)
 
 function CheckBaseUser($LoginUserName, $LoginPass)
 {
-  $Valid = true;
+  $Valid = false;
   return $Valid;
 }
 
