@@ -10,31 +10,31 @@ function Test()
 }
 
 function AuthValidArray()
-
 {
-  $FuncArray["UserName"] = $_POST["UserName"];
-  $FuncArray["RegValidValue"] = _REG_VALID_VALUE;
-  return $FuncArray;
+//    $FuncArray["UserName"] = $_POST["UserName"];
+//    $FuncArray["RegValidValue"] = _REG_VALID_VALUE;
+//    return $FuncArray;
 }
 
 function AuthArray()
 {
 
-  $FuncArray["RegValue"] = _REG_VALUE;
-  $FuncArray["RegButValue"] = _REG_BUT_VALUE;
-  return $FuncArray;
+    $FuncArray["RegValue"] = _REG_VALUE;
+    $FuncArray["RegButValue"] = _REG_BUT_VALUE;
+    return $FuncArray;
 }
 
 function AuthUser($LoginUserName, $LoginPass)
 //Регистрация пользователя
 {
+    AuthValidArray();
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             //Проверяем пользователя по базе
 	
             if (CheckBaseUser($LoginUserName, $LoginPass))
                 {
-                    AuthMenuValid($LoggedAs,$LoginUserName);  //$_POST["UserName"]);
+                    AuthMenuValid(@$LoggedAs,@$LoginUserName);  //$_POST["UserName"]);
                     $AuthStatus = 'valid';
                 }else{
                 AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
@@ -54,37 +54,37 @@ function AuthUser($LoginUserName, $LoginPass)
 
 function PhitRegValid($RegValidValue,$UserName)
 {
-  echo $RegValid.$UserName;
+    echo $RegValid.$UserName;
 }
 
 function CheckBaseUser($LoginUserName, $LoginPass)
 {
-  $Valid = false;
-  return $Valid;
+    $Valid = true;
+    return $Valid;
 }
 
 function AuthMenuValid($LoggedAs,$LoginUserName)
 {
-  echo 'AuthMenuValid';
+    echo 'AuthMenuValid';
 }
 
 function AuthMenu($Action, $ValBut)
 {
-  echo '<div class="AuthMenu">'."\n";
-  echo '<table align="center">'."\n";
-  echo ' <tr>'."\n";
-  echo '  <td>'."\n";
-  echo '   <form method="POST" action="'.$Action.'">'."\n";
-  echo '    Имя:'."\n";
-  echo '    <input type="text" name="LoginUserName">'."\n";
-  echo '    Пароль:'."\n";
-  echo '    <input type="text" name="LoginPass">'."\n";
-  echo '    <input type="submit" name="RegBut" value="'.$ValBut.'">'."\n";
-  echo '   </form>'."\n";
-  echo '  </td>'."\n";
-  echo ' </tr>'."\n";
-  echo '</table>'."\n";
-  echo '</div>'."\n";
+    echo '<div class="AuthMenu">'."\n";
+    echo '<table align="center">'."\n";
+    echo ' <tr>'."\n";
+    echo '  <td>'."\n";
+    echo '   <form method="POST" action="'.$Action.'">'."\n";
+    echo '    Имя:'."\n";
+    echo '    <input type="text" name="LoginUserName">'."\n";
+    echo '    Пароль:'."\n";
+    echo '    <input type="text" name="LoginPass">'."\n";
+    echo '    <input type="submit" name="RegBut" value="'.$ValBut.'">'."\n";
+    echo '   </form>'."\n";
+    echo '  </td>'."\n";
+    echo ' </tr>'."\n";
+    echo '</table>'."\n";
+    echo '</div>'."\n";
 }
 
 ?>
