@@ -7,7 +7,7 @@ include ("lib/var.php");
 //ffff
 
 function __autoload($ClassName) {
-    include('./lib/'.xf$ClassName.'.php');
+    include('./lib/'.$ClassName.'.php');
 }
 
 $Page = new Page();
