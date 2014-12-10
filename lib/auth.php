@@ -24,32 +24,34 @@ function AuthArray()
     return $FuncArray;
 }
 
-function AuthUser($LoginUserName, $LoginPass)
+function auth($loginUserName, $loginUserPass)
 //Регистрация пользователя
 {
-    AuthValidArray();
+//    AuthValidArray();
+    echo '<br>'.$_SESSION['viewNum'].'<br>';
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             //Проверяем пользователя по базе
 	
-            if (CheckBaseUser($LoginUserName, $LoginPass))
+            if (checkBaseUser($loginUserName, $loginUserPass))
                 {
-                    AuthMenuValid(@$LoggedAs,@$LoginUserName);  //$_POST["UserName"]);
-                    $AuthStatus = 'valid';
+                    authMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+                    $authStatus = 'valid';
                 }else{
-                AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+
+                authMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
                 //echo "<br>User ".$LoginUserName." not valid.<br>\n";
                 //	  echo 'Not first'."\n";
-                $AuthStatus = 'error';
+                $authStatus = 'error';
             }
         }
     else
         {
-            AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+            authMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
 	
-            $AuthStatus = 'first';
+            $authStatus = 'first';
         }
-    return $AuthStatus;
+    return $authStatus;
 }
 
 function PhitRegValid($RegValidValue,$UserName)
@@ -68,18 +70,18 @@ function AuthMenuValid($LoggedAs,$LoginUserName)
     echo 'AuthMenuValid';
 }
 
-function AuthMenu($Action, $ValBut)
+function authMenu($action, $valBut)
 {
-    echo '<div class="AuthMenu">'."\n";
+    echo '<div class="authMenu">'."\n";
     echo '<table align="center">'."\n";
     echo ' <tr>'."\n";
     echo '  <td>'."\n";
-    echo '   <form method="POST" action="'.$Action.'">'."\n";
+    echo '   <form method="POST" action="'.$action.'">'."\n";
     echo '    Имя:'."\n";
-    echo '    <input type="text" name="LoginUserName">'."\n";
+    echo '    <input type="text" name="loginUserName">'."\n";
     echo '    Пароль:'."\n";
-    echo '    <input type="text" name="LoginPass">'."\n";
-    echo '    <input type="submit" name="RegBut" value="'.$ValBut.'">'."\n";
+    echo '    <input type="password" name="loginUserPass">'."\n";
+    echo '    <input type="submit" name="authBut" value="'.$valBut.'">'."\n";
     echo '   </form>'."\n";
     echo '  </td>'."\n";
     echo ' </tr>'."\n";
