@@ -24,32 +24,50 @@ function AuthArray()
     return $FuncArray;
 }
 
-function AuthUser($LoginUserName, $LoginPass)
+
+function auth()
 //Регистрация пользователя
 {
-    AuthValidArray();
+//    AuthValidArray();
+//    echo '<br>'.$_SESSION['viewNum'].'<br>';
+
+//    if (varExixst($_SESSION['
+
+    
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
+            if ((isset($_POST['loginUserName']) && (isset($_POST['loginUserPass'])))) {
+                $_SESSION['loginUserName'] = $_POST['loginUserName'];
+                $_SESSION['loginUserPass'] = $_POST['loginUserPass'];
+            } else {
+                return 'error';
+            }
+//
+//            if (isset($_SESSION['loginUserPass'])) {
+//                $loginUserPass = $_SESSION['loginUserPass'];
+//            }
+
             //Проверяем пользователя по базе
 	
-            if (CheckBaseUser($LoginUserName, $LoginPass))
+            if (checkBaseUser($_SESSION['loginUserName'], $_SESSION['loginUserPass']))
                 {
-                    AuthMenuValid(@$LoggedAs,@$LoginUserName);  //$_POST["UserName"]);
-                    $AuthStatus = 'valid';
+                    //authMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+                    return 'valid';
                 }else{
-                AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+
+                authMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
                 //echo "<br>User ".$LoginUserName." not valid.<br>\n";
                 //	  echo 'Not first'."\n";
-                $AuthStatus = 'error';
+                return 'not_valid';
             }
         }
     else
         {
-            AuthMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
+            authMenu($_SERVER['PHP_SELF'],_AUTH_BUT_VALUE);
 	
-            $AuthStatus = 'first';
+            return 'first';
         }
-    return $AuthStatus;
+    return 0;
 }
 
 function PhitRegValid($RegValidValue,$UserName)
@@ -68,18 +86,18 @@ function AuthMenuValid($LoggedAs,$LoginUserName)
     echo 'AuthMenuValid';
 }
 
-function AuthMenu($Action, $ValBut)
+function authMenu($action, $valBut)
 {
-    echo '<div class="AuthMenu">'."\n";
+    echo '<div class="authMenu">'."\n";
     echo '<table align="center">'."\n";
     echo ' <tr>'."\n";
     echo '  <td>'."\n";
-    echo '   <form method="POST" action="'.$Action.'">'."\n";
+    echo '   <form method="POST" action="'.$action.'">'."\n";
     echo '    Имя:'."\n";
-    echo '    <input type="text" name="LoginUserName">'."\n";
+    echo '    <input type="text" name="loginUserName">'."\n";
     echo '    Пароль:'."\n";
-    echo '    <input type="text" name="LoginPass">'."\n";
-    echo '    <input type="submit" name="RegBut" value="'.$ValBut.'">'."\n";
+    echo '    <input type="password" name="loginUserPass">'."\n";
+    echo '    <input type="submit" name="authBut" value="'.$valBut.'">'."\n";
     echo '   </form>'."\n";
     echo '  </td>'."\n";
     echo ' </tr>'."\n";

@@ -1,68 +1,105 @@
 <?php
 class Page
 {
-    function __construct() {
-        echo '<hr><hr><hr>';
-        //			$this->head();
-        //			$this->body();
+    private $_title = '_title';
+    private $_programName = '_programName';
+
+
+    public function __construct() {
+        //echo '<hr><hr><hr>';
+//        $this->showHead($this->shortProgramName);
+        //$this->showBody();
     }
-    function Head($ProgShortName) {
+
+    public function setTitle($title)
+    {
+        $this->_title = $title;
+    }
+    
+    public function showHead() {
         echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">',"\n";
         echo '<html>',"\n";
         echo '<head>',"\n";
         echo ' <meta',"\n";
         echo '  content="text/html; charset=utf-8"',"\n";
         echo '  http-equiv="content-type">',"\n";
-        echo ' <title>'.$ProgShortName.'</title>',"\n";
+        echo ' <title>'.$this->_title.'</title>',"\n";
         echo " <link rel=\"stylesheet\" type=\"text/css\" href=\"main.css\">\n";
         echo '</head>',"\n";
     }
 
-    function Body($Page)
+    public function setProgramName($programName)
+    {
+        $this->_programName = $programName;
+    }
+
+    public function showBodyHead()
+    {
+        echo "<h1>".$this->_programName."</h1>\n";
+    }
+
+    
+    public function showBody($page)
     {
         echo '<body>',"\n";
-        $this->PrgHead();
-        include "reg.php";
-        switch (AuthUser(@$_POST["LoginUserName"],@$_POST["LoginPass"]))
+//        echo '<br>'.$_SESSION['viewNum'].'<br>';        
+        $this->showBodyHead();
+
+        require_once("auth.php");
+
+//        echo auth();
+        switch (auth())
             {
             case 'first';
             //	echo 'First'."\n";
             break;
 
-            case 'error';
-            include "auth_error.php";
+            case 'not_valid';
+            require_once("auth_error.php");
             break;
 
+            case 'valid';
+            $this->authValid();
+            break;
+            
             default:
                 echo "Not!!!";
             }
-        /*      if (AuthUser(@$_POST["LoginUserName"],@$_POST["LoginPass"]) == 'first')
-                {
-                echo 'First'."\n";
-                echo "Ok!!!<br>";
-                } else {
-                include 'auth_error.php';
-                }
-        */
 
-        /*      //include ("page/reg.php");
-                if ($_SERVER['REQUEST_METHOD'] == 'POST')
-                {
-                if ("1") //RegUser())
-                {
-                include ("pages/".$Page.".php");
-                }else
-                {
-                echo "<br>Доступ запрещён.<br>\n";
-                }
-                } else {
-                $this->AthForm();
-                }
-        */
         echo "\n",'</body>',"\n";
 
     }
+    private function authValid()
+    {
+        $this->userMenu();        
+        echo 'Вы вошли как: '.$_SESSION['loginUserName'].'<br>';
+    }
 
+    private function userMenu()
+    {
+        echo '<div class="authMenu">'."\n";
+        echo '<table align="center">'."\n";
+        echo ' <tr>'."\n";
+        echo '  <td>'."\n";
+        echo '   <form method="POST" action="'.$action.'">'."\n";
+        echo '    Имя:'."\n";
+        echo '    <input type="text" name="loginUserName">'."\n";
+        echo '    Пароль:'."\n";
+        echo '    <input type="password" name="loginUserPass">'."\n";
+        echo '    <input type="submit" name="authBut" value="'.$valBut.'">'."\n";
+        echo '   </form>'."\n";
+        echo '  </td>'."\n";
+        echo ' </tr>'."\n";
+        echo '</table>'."\n";
+        echo '</div>'."\n";
+        
+    }
+
+
+
+
+
+    
     function Page1($Page)
     {
         include ("pages/main.php");			
@@ -102,10 +139,7 @@ class Page
         echo "</table>\n";
         /////////////////////////////////////////
     }
-    function PrgHead()
-    {
-        echo "<h1>"._PRG_NAME."</h1>\n";
-    }
+
 }
 ?>
 
