@@ -1,6 +1,56 @@
 <?php
 //Файл содержит функции для отображения панели регистрации.
+class Auth
+{
+    static private $authValid = false;
+    static private $firstView = true;
 
+    static function authError()
+    {
+        echo '<h2 align="center">'._AUTH_ERROR_TEXT.'</h2>';
+    }
+
+    static public function getAuthValid()
+    {
+        return self::$authValid;
+    }
+    static public function getFirstView()
+    {
+        return self::$firstView;
+    }
+    static public function authValid()
+    {
+        if (isset($_SESSION['loginUserName'])) {
+            //Проверка пользователя по базе
+            return  self::verifUser('session');
+        } elseif (isset($_POST['loginUserName'])) {
+            //Проверка пользователя по базе
+            if (self::verifUser('post')) {
+            $_SESSION['loginUserName'] = $_POST['loginUserName'];
+            $_SESSION['loginUserPass'] = $_POST['loginUserPass'];
+            return true;
+        } else {
+            return false;
+        }
+            //self::$firstView = false;
+        } else {
+            //Меню с вводом пароля
+            //echo 'Menu with password11<br>';
+            return false;
+        }
+    }
+    
+    static public function verifUser($from = "0")
+    {
+        echo 'verifUser - from '.$from.'<br>';
+        return true;
+    }
+
+
+}
+
+
+/*
 function Test()
 {
     echo 'test';
@@ -106,3 +156,4 @@ function authMenu($action, $valBut)
 }
 
 ?>
+*/

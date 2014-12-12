@@ -42,10 +42,19 @@ class Page
     public function showBody($page)
     {
         echo '<body>',"\n";
+        echo session_id();
 //        echo '<br>'.$_SESSION['viewNum'].'<br>';        
         $this->showBodyHead();
+        if (Auth::authValid()) {
+            $this->userMenu();
+        } elseif (Auth::getFirstView()) {
+            //echo 'Menu with password<br>';
+            $this->authMenu();
+        } else {
+            Auth::authError();
+        }
 
-        require_once("auth.php");
+/*        require_once("auth.php");
 
 //        echo auth();
         switch (auth())
@@ -65,7 +74,7 @@ class Page
             default:
                 echo "Not!!!";
             }
-
+*/
         echo "\n",'</body>',"\n";
 
     }
@@ -81,7 +90,23 @@ class Page
         echo '<table align="center">'."\n";
         echo ' <tr>'."\n";
         echo '  <td>'."\n";
-        echo '   <form method="POST" action="'.$action.'">'."\n";
+        echo '    Вы вошли как: '.$_SESSION['loginUserName']."\n\n";
+        echo '  </td>'."\n";
+        echo '  <td>',"\n";
+        echo '   <a href="'.$_SERVER['PHP_SELF'].'?exit=true">Выход</a><br>'.session_id()."\n";
+        echo '  <td>'."\n";
+        echo ' </tr>'."\n";
+        echo '</table>'."\n";
+        echo '</div>'."\n";
+        
+    }
+    function authMenu($valBut = _AUTH_BUT_VALUE)
+    {
+        echo '<div class="authMenu">'."\n";
+        echo '<table align="center">'."\n";
+        echo ' <tr>'."\n";
+        echo '  <td>'."\n";
+        echo '   <form method="POST" action="'.$_SERVER['PHP_SELF'].'">'."\n";
         echo '    Имя:'."\n";
         echo '    <input type="text" name="loginUserName">'."\n";
         echo '    Пароль:'."\n";
@@ -92,7 +117,6 @@ class Page
         echo ' </tr>'."\n";
         echo '</table>'."\n";
         echo '</div>'."\n";
-        
     }
 
 
