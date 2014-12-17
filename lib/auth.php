@@ -3,20 +3,11 @@
 class Auth
 {
     static private $authValid = false;
-    static private $firstView = true;
 
-    static function authError()
-    {
-        echo '<h2 align="center">'._AUTH_ERROR_TEXT.'</h2>';
-    }
 
     static public function getAuthValid()
     {
         return self::$authValid;
-    }
-    static public function getFirstView()
-    {
-        return self::$firstView;
     }
     static public function authValid()
     {
@@ -42,7 +33,7 @@ class Auth
     
     static public function verifUser($from = "0")
     {
-        echo 'verifUser - from '.$from.'<br>';
+        //echo 'verifUser - from '.$from.'<br>';
         return true;
     }
 
