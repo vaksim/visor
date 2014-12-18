@@ -34,7 +34,26 @@ class Auth
     static public function verifUser($from = "0")
     {
         //echo 'verifUser - from '.$from.'<br>';
-        return true;
+        //DBConnect::$db =
+        DB::connect( "localhost", "visor", "chrbu01", "123");
+        //$db = pg_connect("host=localhost dbname=visor user=chrbu01 password=123")
+        //  or die('Cold not connect: ' . pg_last_error());
+        //DBConnect::setQuery('SELECT ' . $_POST['loginUserName'] . ' FROM users');
+        DB::setQuery('SELECT * FROM users WHERE name = \'' . $_POST['loginUserName'] . '\' AND password=\'' . $_POST['loginUserPass'] . '\'');
+        $result = (pg_query(DB::getQuery())) or die('Error of query: ' . pg_last_error());
+        if (pg_num_rows($result) != 0) {return true;}
+        /*
+        echo "<table>\n";
+        while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+            echo "\t<tr>\n";
+            foreach ($line as $col_value) {
+                echo "\t\t<td>$col_value</td>\n";
+            }
+            echo "\t</tr>\n";
+        }
+        Echo "</table>\n";
+        */
+        return false;
     }
 
 
