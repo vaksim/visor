@@ -15,7 +15,7 @@ class UserMenu
         echo '<table align="center">'."\n";
         echo ' <tr>'."\n";
         echo '  <td>'."\n";
-        echo '    '.'Вы вошли как'.': <b>'.$_SESSION['loginUserName']."<b>\n";
+        echo '    '.'Вы вошли как'.': <b>'.$_SESSION['loginUserName']."</b>\n";
         echo '  </td>'."\n";
         echo '  <td>',"\n";
         echo '   [ <a href="'.$_SERVER['PHP_SELF'].'?exit=true">'.'Выход'.'</a> ]<br>'."\n";

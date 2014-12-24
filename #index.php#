@@ -62,7 +62,7 @@ if (isset($_POST['loginUserName'])) {
 
 if ($authValid) {
     if (isset($_GET['page'])) {
-        $page = $_GET['page'];
+       $page = $_GET['page'];
     } else {
         $page = 'Main';
     }
@@ -80,18 +80,5 @@ $page = $pagePref.$page;
 //Page::setProgramName(_PROGRAM_NAME);
 Page::showHead();
 Page::showBodyStart();
-ProgramTitle::show();
 UserMenu::showMenu($authValid);
-//Page::showBodyPage($page);
-//$bodyPage =  new $page;
-$page::show();
-HtmlDebug::show();
-Page::showBodyFinish();
-//$page = new Page();
-//$page->setTitle(_PROGRAM_SHORT_NAME);
-//$page->setProgramName(_PROGRAM_NAME);
-//$page->showHead();
-//$page->ShowBody("main");
-//$Page->foot();
-
-?>
+ю.вдллдлдлдлллвввлллддддллдлдлдлЧгыфвфваываыва2ололдлдл

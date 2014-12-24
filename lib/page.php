@@ -6,13 +6,8 @@ class Page
     static private $_authValid = false;
 
 
-    public function __construct() {
-        //self::_userExit();
-        //echo '222222222';
-        //echo '<hr><hr><hr>';
-//        $this->showHead($this->shortProgramName);
-        //$this->showBody();
-    }
+    private function __construct(){}
+    private function __clon(){}
 
     static public function setTitle($title)
     {
@@ -20,6 +15,9 @@ class Page
     }
     
     static public function showHead() {
+        IncTpl::show('head');
+//        SC::show('_SSSS');
+/*
         echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">',"\n";
         echo '<html>',"\n";
         echo '<head>',"\n";
@@ -29,6 +27,8 @@ class Page
         echo ' <title>'.self::$_title.'</title>',"\n";
         echo " <link rel=\"stylesheet\" type=\"text/css\" href=\"main.css\">\n";
         echo '</head>',"\n";
+*/
+
     }
 
     static public function setProgramName($programName)
@@ -46,7 +46,7 @@ class Page
         echo '<body>',"\n";
 //        echo session_id();
 //        echo '<br>'.$_SESSION['viewNum'].'<br>';        
-        self::showBodyHead();
+//        self::showBodyHead();
     }
 
     static public function showBodyPage($page = null)
@@ -62,14 +62,14 @@ class Page
 */
         
         
-        echo '[ <a href="'.'index.php'.'">'.'Главная страница'.'</a> ]<br>'."\n";
+        //  echo '[ <a href="'.'index.php'.'">'.'Главная страница'.'</a> ]<br>'."\n";
         
-        if (self::$_authValid) {echo 'eeeeeeeeeeeeeeee';}
+        //  if (self::$_authValid) {echo 'eeeeeeeeeeeeeeee';}
     }
 
     static public function showBodyFinish()
     {
-        echo "\n",'</body>',"\n";
+        echo "\n" . '</body>' . "\n" . '</html>' . "\n";
     }
 
     static private function _getFirstView()
@@ -89,4 +89,3 @@ class Page
     }
 }
 ?>
-

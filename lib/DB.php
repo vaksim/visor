@@ -8,6 +8,7 @@ class DB
     static private $_password = null;
     static private $_db = null;
     static private $_query = null;
+    static public $_result = null;
         
     static public function connect($host = 'localhost', $dbName = 'test', $user = 'test', $password = null)
     {
@@ -16,11 +17,11 @@ class DB
         self::$_user = $user;
         self::$_password = $password;
         $dbParam = 'host=' . self::$_host . ' dbname=' . self::$_dbName . ' user=' . self::$_user . ' password=' . self::$_password;
-        echo $dbParam;
+//        echo $dbParam;
         //self::$db =
         pg_connect($dbParam)
             or die('Cold not connect: ' . pg_last_error());
-        echo 'UUUUUUUUUUUUUUUUUU';
+//        echo 'UUUUUUUUUUUUUUUUUU';
         //return $db;
     }
 
@@ -42,6 +43,29 @@ class DB
     static public function setConnectonType($connetionType = 'pgsql')
     {
         self::$connetionType = $connetionType;
+    }
+
+    static public function setResult($result)
+    {
+        if (!$result) {
+            echo "<br>Ошибка в запросе<br>\n";
+            self::$_result = $result;
+        } else {
+//            echo 'llllllllllll' . $result . 'ssssssssssssssss';
+            self::$_result = $result;
+        }
+    }
+
+    static public function getResult()
+    {
+        if (!self::$_result) {
+            echo "<br>Запрос не сформирован<br>\n";
+        } else {
+//            echo 'llllllllllll' . $result . 'ssssssssssssssss';
+            return self::$_result;
+        }
+        
+
     }
 }
 ?>
