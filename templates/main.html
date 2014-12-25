@@ -1,2 +1,23 @@
-<a href="index.php?page=Main">Главная</a>
+<table>
+  <tr>
+	<th>№ п/п</th>
+	<th>Подразделение</th>
+	<th>Наименование</th>
+	<th>Номер</th>
+	<th>Дата постановки в ремонт</th>
+	<th>Дата окончания ремонта</th>
+  </tr>
+  <?php foreach(HtmlMain::$arrLocomotives as $key=>$arrLoco) { ?>
+  <tr onMouseOver="this.style.backgroundColor='#ececec';"
+	  onMouseOut="this.style.backgroundColor='white'"
+	 onclick="location.href='./tmp.html?id=<?=$arrLoco['id']?>'">
+	<td><?=$key + 1?></td>
+	<?php foreach($arrLoco as $value) { ?>
+	<td><?=$value?></td>
+	<?php } ?>
+  </tr>
+  <?php } ?>
+</table>
+
+<a href="index.php?page=Main">Главная</a><br>
 <div class="userTag"> maximus </div>

@@ -1,17 +1,48 @@
-
 body, th, td, font {
     font: 12px Verdana,Arial,sans-serif;
 }
 
 /* Clean out MARGIN and PADDING */
-html, body, form, fieldset, h3, h4, h5, h6, p, pre, blockquote,
-ul, ol, dl, li, dd {
+
+html, body, form, fieldset, h3, h4, h5, h6, p, pre, blockquote, ul, ol, dl, li, dd {
     margin: 0; padding: 0;
 }
 
+h1 {
+	font-size: 120%;
+	color: #aa1111;
+}
+
 /* Tables */
-table { border-spacing: 0; }  /* cellspacing=0 */
-td, th { padding: 0; }        /* cellpadding=0 */
+
+table {
+	border-spacing: 0px;
+	border: 3px solid black;
+	border-collapse: collapse;
+	//	bordercolor: #000000;
+	//	border-top: 5px;
+
+
+}  /* cellspacing=0 */
+
+tr:nth-of-type(even) {
+	background: #FFFFF0;
+}
+tr:nth-of-type(odd) {
+	background: #FFF8DC;
+}
+
+
+th {
+	padding: 2px;
+	border: 2px solid black;
+	background: #EFEFEF;
+}
+
+td {
+	padding: 2px;
+	border: 1px solid black;
+}        /* cellpadding=0 */
 
 /* ---------------------------------- *
      Inputs, buttons, forms
@@ -39,6 +70,7 @@ textarea      { font-size: 12px; }
 .tCenter   { text-align: center !important; }
 .pad_2,  .pad_2  td, td.pad_2  { padding:  2px; }
 
+
 .userTag {
 	position: absolute;
 	width: 200px;
@@ -55,9 +87,61 @@ textarea      { font-size: 12px; }
 	position: absolute;
 	width: 100%;
 	bottom: 0px;
-	hight: 300px;
-	background: #EFEFEF;
+	height: 200px;
+	background: #F8AFBA;
 }
 
 .ProgramTitle {
+	position: fixed;
+	top: 5px;
+	left: 5px;
+	right: 5px;
+	height: 35px;
+	background: #FFFFFF;
+	line-height: 35px;
+	padding: 5px;
 }
+
+.UserMenu {
+	background: #EFEFEF;
+	/*	border: 1px solid #CFD4D8; */
+	font-size: 11px;
+	font-family: Verdana,sans-serif;
+	position: fixed; /**/
+	left: 5px;/**/
+	right: 5px;
+	top: 55px;/**/
+	/*	width: 500px;/**/
+	height: 20px;
+	padding: 1px;
+	line-height: 20px;
+	padding: 5px;
+}
+
+.layer1 {
+	width: 300px;/* Ширина слоя */
+	background: #fc0; /* Цвет фона */
+	height: 500px; /* Высота слоя */
+	/*	padding: 5px; /* Поля вокруг текста */
+}
+
+.Page {
+	position: fixed;/**/
+	top: 90px;
+	left: 5px;
+	right: 5px;
+	bottom: 5px;
+	background: #FFFFFF;
+	overflow: auto;
+	padding: 5px;
+
+}
+
+.body {
+	background: blue;
+}
+/*
+h1 {
+	font-size: 120%;
+	color: #f0f000;
+}*/

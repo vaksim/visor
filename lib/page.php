@@ -43,7 +43,7 @@ class Page
 
     static public function showBodyStart()
     {
-        echo '<body>',"\n";
+        echo '<body bgcolor="#EDDE7D">',"\n";
 //        echo session_id();
 //        echo '<br>'.$_SESSION['viewNum'].'<br>';        
 //        self::showBodyHead();
@@ -51,7 +51,7 @@ class Page
 
     static public function showBodyPage($page = null)
     {
-        echo $page."<br>\n";
+        //      echo $page."<br>\n";
         //self::showMenu();
 /*        self::$_authValid = Auth::authValid();
         UserMenu::showMenu(self::$_authValid);
