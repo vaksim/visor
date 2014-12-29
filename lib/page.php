@@ -31,6 +31,20 @@ class Page
 
     }
 
+    static public function show($page = null, $pagePref = null)
+    {
+        if (!$page) {
+            echo 'Page is not set...';
+            return 0;
+        }
+
+        if (isset($_POST['page'])) {
+            $page = $_POST['page'];
+        }
+        $page = $pagePref.$page;
+        $page::show();
+    }
+    
     static public function setProgramName($programName)
     {
         self::$_programName = $programName;

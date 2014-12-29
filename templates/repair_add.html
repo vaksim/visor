@@ -1,0 +1,10 @@
+<!-- Панель с кнопками -->
+<form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>?page=RepairAdd">
+  <input type="hidden" name="RepairAddSave" value="RepairAdd">
+  <input type="submit" name="but" value="Сохранить"><br>
+  Подразделение:
+  <input type="text" name="subdivision" value="<?=HtmlRepairAdd::$subdivision?>">
+  <input type="submit" name="butSub" value="..."><br>
+  Тип машины:
+</form>
+

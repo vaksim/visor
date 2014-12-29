@@ -1,13 +1,18 @@
-body, th, td, font {
-    font: 12px Verdana,Arial,sans-serif;
+body, th, td, font, div, table {
+	font: 12px Verdana,Arial,sans-serif;
+
 }
 
 /* Clean out MARGIN and PADDING */
 
 html, body, form, fieldset, h3, h4, h5, h6, p, pre, blockquote, ul, ol, dl, li, dd {
-    margin: 0; padding: 0;
+    margin: 0; padding: 0px;
 }
 
+form {
+	margin: 0; padding: 0px;
+}
+	
 h1 {
 	font-size: 120%;
 	color: #aa1111;
@@ -25,13 +30,14 @@ table {
 
 }  /* cellspacing=0 */
 
+/*
 tr:nth-of-type(even) {
 	background: #FFFFF0;
 }
 tr:nth-of-type(odd) {
 	background: #FFF8DC;
 }
-
+*/
 
 th {
 	padding: 2px;
@@ -68,7 +74,7 @@ textarea      { font-size: 12px; }
 .topmenu td { padding: 4px; font-size: 11px; white-space: nowrap; }
 .w100   { width: 100% !important; }
 .tCenter   { text-align: center !important; }
-.pad_2,  .pad_2  td, td.pad_2  { padding:  2px; }
+.xopad_2,  .pad_2  td, td.pad_2  { padding:  2px; }
 
 
 .userTag {
@@ -105,8 +111,8 @@ textarea      { font-size: 12px; }
 .UserMenu {
 	background: #EFEFEF;
 	/*	border: 1px solid #CFD4D8; */
-	font-size: 11px;
-	font-family: Verdana,sans-serif;
+	font-size: 12px;
+	/* font-family: Verdana,Arial,sans-serif; /* Verdana,sans-serif; */
 	position: fixed; /**/
 	left: 5px;/**/
 	right: 5px;
@@ -114,8 +120,16 @@ textarea      { font-size: 12px; }
 	/*	width: 500px;/**/
 	height: 20px;
 	padding: 1px;
-	line-height: 20px;
+/*	line-height: 35px;*/
 	padding: 5px;
+}
+
+.UserMenu table {
+	border: 0px;
+}
+
+.UserMenu td {
+	border: 0px;
 }
 
 .layer1 {
@@ -127,7 +141,7 @@ textarea      { font-size: 12px; }
 
 .Page {
 	position: fixed;/**/
-	top: 90px;
+	top: 125px;
 	left: 5px;
 	right: 5px;
 	bottom: 5px;
@@ -137,11 +151,31 @@ textarea      { font-size: 12px; }
 
 }
 
-.body {
-	background: blue;
+.Navigation {
+	background: #FFFFFF;
+	font-size: 12px;
+	position: fixed; /**/
+	left: 5px;/**/
+	right: 5px;
+	top: 90px;/**/
+	height: 20px;
+	padding: 5px;
+
+
 }
 /*
 h1 {
 	font-size: 120%;
 	color: #f0f000;
 }*/
+.ButtonPanel {
+	background: #FFFFFF;
+	font-size: 12px;
+	position: fixed; /**/
+	left: 5px;/**/
+	right: 5px;
+	top: 125px;/**/
+	height: 20px;
+	padding: 5px;
+
+}

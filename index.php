@@ -74,7 +74,7 @@ if ($authValid) {
 
 
 
-$page = $pagePref.$page;
+//$page = $pagePref.$page;
 //echo '1111111111111';
 //Page::setTitle(_PROGRAM_SHORT_NAME);
 //Page::setProgramName(_PROGRAM_NAME);
@@ -82,12 +82,18 @@ Page::showHead();
 Page::showBodyStart();
 ProgramTitle::show();
 UserMenu::show($authValid);
+if ($authValid) {
+    Navigation::show();
+}
 //Page::showBodyPage($page);
 //$bodyPage =  new $page;
 echo '<div class="Page">' . "\n";
-$page::show();
+//echo $page;
+Page::show($page, $pagePref);
+//$page::show();
 echo '</div>' . "\n";
 HtmlDebug::show();
+
 Page::showBodyFinish();
 //$page = new Page();
 //$page->setTitle(_PROGRAM_SHORT_NAME);
