@@ -48,57 +48,24 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: locomotive_name; Type: TABLE; Schema: public; Owner: chrbu01; Tablespace: 
+-- Name: locomotives; Type: TABLE; Schema: public; Owner: chrbu01; Tablespace: 
 --
 
-CREATE TABLE locomotive_name (
+CREATE TABLE locomotives (
     id integer NOT NULL,
-    name text NOT NULL
+    locomotive_names_id integer,
+    number text NOT NULL
+
 );
 
 
-ALTER TABLE public.locomotive_name OWNER TO chrbu01;
+ALTER TABLE public.locomotives OWNER TO chrbu01;
 
 --
--- Name: locomotive_name_id_seq; Type: SEQUENCE; Schema: public; Owner: chrbu01
+-- Name: locomotives_id_seq; Type: SEQUENCE; Schema: public; Owner: chrbu01
 --
 
-CREATE SEQUENCE locomotive_name_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.locomotive_name_id_seq OWNER TO chrbu01;
-
---
--- Name: locomotive_name_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chrbu01
---
-
-ALTER SEQUENCE locomotive_name_id_seq OWNED BY locomotive_name.id;
-
-
---
--- Name: locomotive; Type: TABLE; Schema: public; Owner: chrbu01; Tablespace: 
---
-
-CREATE TABLE locomotive (
-    id integer NOT NULL,
-    name text NOT NULL,
-    number text NOT NULL,
-    locomotive_name_id integer
-);
-
-
-ALTER TABLE public.locomotive OWNER TO chrbu01;
-
---
--- Name: locomotive_id_seq; Type: SEQUENCE; Schema: public; Owner: chrbu01
---
-
-CREATE SEQUENCE locomotive_id_seq
+CREATE SEQUENCE locomotives_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -109,31 +76,29 @@ CREATE SEQUENCE locomotive_id_seq
 ALTER TABLE public.locomotives_id_seq OWNER TO chrbu01;
 
 --
--- Name: locomotive_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chrbu01
+-- Name: locomotives_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chrbu01
 --
 
-ALTER SEQUENCE locomotive_id_seq OWNED BY locomotive.id;
+ALTER SEQUENCE locomotives_id_seq OWNED BY locomotives.id;
 
 
 --
--- Name: repair; Type: TABLE; Schema: public; Owner: chrbu01; Tablespace: 
+-- Name: locomotive_names; Type: TABLE; Schema: public; Owner: chrbu01; Tablespace: 
 --
 
-CREATE TABLE repair (
+CREATE TABLE locomotive_names (
     id integer NOT NULL,
-    locomotive_id integer NOT NULL,
-    date_beginning date,
-    date_ending date
+    name text NOT NULL
 );
 
 
-ALTER TABLE public.repair OWNER TO chrbu01;
+ALTER TABLE public.locomotive_names OWNER TO chrbu01;
 
 --
--- Name: repair_id_seq; Type: SEQUENCE; Schema: public; Owner: chrbu01
+-- Name: locomotive_names_id_seq; Type: SEQUENCE; Schema: public; Owner: chrbu01
 --
 
-CREATE SEQUENCE repair_id_seq
+CREATE SEQUENCE locomotive_names_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -141,13 +106,82 @@ CREATE SEQUENCE repair_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.repair_id_seq OWNER TO chrbu01;
+ALTER TABLE public.locomotive_names_id_seq OWNER TO chrbu01;
 
 --
--- Name: repair_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chrbu01
+-- Name: locomotive_names_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chrbu01
 --
 
-ALTER SEQUENCE repair_id_seq OWNED BY repair.id;
+ALTER SEQUENCE locomotive_names_id_seq OWNED BY locomotive_names.id;
+
+
+--
+-- Name: repairs; Type: TABLE; Schema: public; Owner: chrbu01; Tablespace: 
+--
+
+CREATE TABLE repairs (
+    id integer NOT NULL,
+    locomotives_id integer NOT NULL,
+    date_beginning date,
+    date_ending date,
+    subdivisions_id integer
+);
+
+
+ALTER TABLE public.repairs OWNER TO chrbu01;
+
+--
+-- Name: repairs_id_seq; Type: SEQUENCE; Schema: public; Owner: chrbu01
+--
+
+CREATE SEQUENCE repairs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.repairs_id_seq OWNER TO chrbu01;
+
+--
+-- Name: repairs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chrbu01
+--
+
+ALTER SEQUENCE repairs_id_seq OWNED BY repairs.id;
+
+
+--
+-- Name: subdivisions; Type: TABLE; Schema: public; Owner: chrbu01; Tablespace: 
+--
+
+CREATE TABLE subdivisions (
+    id integer NOT NULL,
+    name text NOT NULL
+);
+
+
+ALTER TABLE public.subdivisions OWNER TO chrbu01;
+
+--
+-- Name: subdivisions_id_seq; Type: SEQUENCE; Schema: public; Owner: chrbu01
+--
+
+CREATE SEQUENCE subdivisions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.subdivisions_id_seq OWNER TO chrbu01;
+
+--
+-- Name: subdivisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: chrbu01
+--
+
+ALTER SEQUENCE subdivisions_id_seq OWNED BY subdivisions.id;
 
 
 --
@@ -190,21 +224,28 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: chrbu01
 --
 
-ALTER TABLE ONLY locomotive_name ALTER COLUMN id SET DEFAULT nextval('locomotive_name_id_seq'::regclass);
+ALTER TABLE ONLY locomotives ALTER COLUMN id SET DEFAULT nextval('locomotives_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: chrbu01
 --
 
-ALTER TABLE ONLY locomotive ALTER COLUMN id SET DEFAULT nextval('locomotive_id_seq'::regclass);
+ALTER TABLE ONLY locomotive_names ALTER COLUMN id SET DEFAULT nextval('locomotive_names_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: chrbu01
 --
 
-ALTER TABLE ONLY repair ALTER COLUMN id SET DEFAULT nextval('repair_id_seq'::regclass);
+ALTER TABLE ONLY repairs ALTER COLUMN id SET DEFAULT nextval('repairs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: chrbu01
+--
+
+ALTER TABLE ONLY subdivisions ALTER COLUMN id SET DEFAULT nextval('subdivisions_id_seq'::regclass);
 
 
 --
@@ -215,52 +256,68 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- Data for Name: locomotive_name; Type: TABLE DATA; Schema: public; Owner: chrbu01
+-- Data for Name: locomotives; Type: TABLE DATA; Schema: public; Owner: chrbu01
 --
 
-COPY locomotive_name (id, name) FROM stdin;
+COPY locomotives (id, locomotive_names_id, number) FROM stdin;
+2	1	666666
+1	1	123321
+\.
+
+
+--
+-- Name: locomotives_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chrbu01
+--
+
+SELECT pg_catalog.setval('locomotives_id_seq', 2, true);
+
+
+--
+-- Data for Name: locomotive_names; Type: TABLE DATA; Schema: public; Owner: chrbu01
+--
+
+COPY locomotive_names (id, name) FROM stdin;
 1	ПБ
 \.
 
 
 --
--- Name: locomotive_name_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chrbu01
+-- Name: locomotive_names_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chrbu01
 --
 
-SELECT pg_catalog.setval('locomotive_name_id_seq', 1, true);
+SELECT pg_catalog.setval('locomotive_names_id_seq', 1, true);
 
 
 --
--- Data for Name: locomotive; Type: TABLE DATA; Schema: public; Owner: chrbu01
+-- Data for Name: repairs; Type: TABLE DATA; Schema: public; Owner: chrbu01
 --
 
-COPY locomotive (id, name, number, locomotive_name_id) FROM stdin;
-2	CM-3	666666	\N
-1	ПОМ-7	123321	1
+COPY repairs (id, locomotives_id, date_beginning, date_ending, subdivisions_id) FROM stdin;
+1	1	2014-12-12	2015-02-15	1
 \.
 
 
 --
--- Name: locomotive_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chrbu01
+-- Name: repairs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chrbu01
 --
 
-SELECT pg_catalog.setval('locomotive_id_seq', 2, true);
+SELECT pg_catalog.setval('repairs_id_seq', 1, true);
 
 
 --
--- Data for Name: repair; Type: TABLE DATA; Schema: public; Owner: chrbu01
+-- Data for Name: subdivisions; Type: TABLE DATA; Schema: public; Owner: chrbu01
 --
 
-COPY repair (id, locomotive_id, date_beginning, date_ending) FROM stdin;
-1	1	2014-12-12	2015-02-15
+COPY subdivisions (id, name) FROM stdin;
+1	Черепаново
 \.
 
 
 --
--- Name: repair_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chrbu01
+-- Name: subdivisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: chrbu01
 --
 
-SELECT pg_catalog.setval('repair_id_seq', 1, true);
+SELECT pg_catalog.setval('subdivisions_id_seq', 1, true);
 
 
 --
@@ -280,27 +337,35 @@ SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
--- Name: locomotive_id_pkey; Type: CONSTRAINT; Schema: public; Owner: chrbu01; Tablespace: 
+-- Name: locomotives_id_pkey; Type: CONSTRAINT; Schema: public; Owner: chrbu01; Tablespace: 
 --
 
-ALTER TABLE ONLY locomotive
-    ADD CONSTRAINT locomotive_id_pkey PRIMARY KEY (id);
-
-
---
--- Name: locomotive_name_id_pkey; Type: CONSTRAINT; Schema: public; Owner: chrbu01; Tablespace: 
---
-
-ALTER TABLE ONLY locomotive_name
-    ADD CONSTRAINT locomotive_name_id_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY locomotives
+    ADD CONSTRAINT locomotives_id_pkey PRIMARY KEY (id);
 
 
 --
--- Name: repair_id_pkey; Type: CONSTRAINT; Schema: public; Owner: chrbu01; Tablespace: 
+-- Name: locomotive_names_id_pkey; Type: CONSTRAINT; Schema: public; Owner: chrbu01; Tablespace: 
 --
 
-ALTER TABLE ONLY repair
-    ADD CONSTRAINT repair_id_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY locomotive_names
+    ADD CONSTRAINT locomotive_names_id_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: repairs_id_pkey; Type: CONSTRAINT; Schema: public; Owner: chrbu01; Tablespace: 
+--
+
+ALTER TABLE ONLY repairs
+    ADD CONSTRAINT repairs_id_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: subdivisions_id_pkey; Type: CONSTRAINT; Schema: public; Owner: chrbu01; Tablespace: 
+--
+
+ALTER TABLE ONLY subdivisions
+    ADD CONSTRAINT subdivisions_id_pkey PRIMARY KEY (id);
 
 
 --

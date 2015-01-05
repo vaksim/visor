@@ -22,11 +22,8 @@ h1 {
 
 table {
 	border-spacing: 0px;
-	border: 3px solid black;
+	border: 0px solid black;
 	border-collapse: collapse;
-	//	bordercolor: #000000;
-	//	border-top: 5px;
-
 
 }  /* cellspacing=0 */
 
@@ -40,14 +37,15 @@ tr:nth-of-type(odd) {
 */
 
 th {
-	padding: 2px;
-	border: 2px solid black;
+	padding: 0px;
+/*	border: 2px solid black;
 	background: #EFEFEF;
+*/
 }
 
 td {
-	padding: 2px;
-	border: 1px solid black;
+	padding: 0px;
+/*	border: 1px solid white; */
 }        /* cellpadding=0 */
 
 /* ---------------------------------- *
@@ -140,7 +138,7 @@ textarea      { font-size: 12px; }
 }
 
 .Page {
-	position: fixed;/**/
+	position: fixed;
 	top: 125px;
 	left: 5px;
 	right: 5px;
@@ -151,23 +149,38 @@ textarea      { font-size: 12px; }
 
 }
 
+.ChildPage {
+	position: fixed;
+	top: 125px;
+	left: 300px;
+	right: 5px;
+	background: yellow;
+	padding: 5px;
+	overflow: auto;
+}
+.ChildPage1 {
+	position: fixed;
+	top: 125px;
+	left: 100px;
+	right: 5px;
+	background: blue;
+	padding: 5px;
+	overflow: auto;
+}
+
 .Navigation {
 	background: #FFFFFF;
 	font-size: 12px;
-	position: fixed; /**/
-	left: 5px;/**/
+	position: fixed;
+	left: 5px;
 	right: 5px;
-	top: 90px;/**/
+	top: 90px;
 	height: 20px;
 	padding: 5px;
 
 
 }
-/*
-h1 {
-	font-size: 120%;
-	color: #f0f000;
-}*/
+
 .ButtonPanel {
 	background: #FFFFFF;
 	font-size: 12px;
@@ -178,4 +191,57 @@ h1 {
 	height: 20px;
 	padding: 5px;
 
+}
+
+.PageRepairAdd {
+	position: fixed;
+	top: 125px;
+	left: 5px;
+	right: 5px;
+	background: red;
+	padding: 5px;
+	overflow: auto;
+}
+
+.ControlButtons {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	background: #AAA222;
+	padding: 5px;
+}
+
+.RepairAddLocomotive {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 5px;
+	bottom: 5px;
+	background: #FFFFFF;
+	overflow: auto;
+	padding: 5px;
+
+}
+
+.tmp {
+	position: relative;
+	background: #AAA222;
+	padding: 0px;
+
+}
+
+
+.Table table {
+	border: 2px solid black;
+}
+
+.Table th {
+	padding: 2px;
+	border: 1px solid black;
+	background: #EFEFEF;
+}
+
+.Table td {
+	padding: 2px;
+	border: 1px solid black;
 }

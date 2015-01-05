@@ -2,8 +2,7 @@
 //Файл содержит функции для отображения панели регистрации.
 class Auth
 {
-    static private $authValid = false;
-
+    static public $valid = false;
 
     static public function getAuthValid()
     {
@@ -13,12 +12,15 @@ class Auth
     {
         DB::connect( "localhost", "visor", "chrbu01", "123");
 
-        if (isset($_SESSION['loginUserName'])) {
+        if (isset($_SESSION['login_user_name'])) {
+            self::$valid = true;
             return true;
-        } elseif (isset($_POST['loginUserName'])) {
+        } elseif (isset($_POST['login_user_name'])) {
             //Проверка пользователя по базе
-            if (self::_verifUserPost($_POST['loginUserName'], $_POST['loginUserPass'])) {
-                $_SESSION['loginUserName'] = $_POST['loginUserName'];
+            if (self::_verifUserPost($_POST['login_user_name'], $_POST['login_user_pass'])) {
+                $_SESSION['login_user_name'] = $_POST['login_user_name'];
+                User::$name = $_POST['login_user_name'];
+                self::$valid = true;
                 return true;
             }
         }

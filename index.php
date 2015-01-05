@@ -4,6 +4,11 @@
 //init_set('session.use_only_cooke',1);
 session_start();
 
+$authValid = false;
+$pagePref = 'Page';
+$page = 'Clear';
+
+
 //if (isset($_SESSION['viewNum'])) {
 //    $_SESSION['viewNum']++;
 //} else {
@@ -30,9 +35,6 @@ require_once("lib/var.php");
 //include ("lib/page.php");
 //include ("pages/main.php");
 //ffff
-$authValid = false;
-$pagePref = 'Html';
-$page = 'Clear';
 
 function __autoload($className)
 {
@@ -48,29 +50,27 @@ function __autoload($className)
 }
 
 //self::showMenu();
-$authValid = Auth::authValid();
-//UserMenu::showMenu($authValid);
-/*
-if (isset($_POST['loginUserName'])) {
-    if ($authValid) {
-        $page = 'Begin';
-    } else {
-        $page = 'Error';
-    }
-}
-*/
+Auth::authValid();
 
-if ($authValid) {
-    if (isset($_GET['page'])) {
-        $page = $_GET['page'];
+if (Auth::$valid) {
+    User::prep($_SESSION['login_user_name']);
+    if (isset($_POST['page'])) {
+        $page = $_POST['page'];
     } else {
-        $page = 'Main';
+        $page = 'Repairs';
     }
-} elseif (isset($_POST['loginUserName'])) {
+} elseif (isset($_POST['login_user_name'])) {
     $page = 'Error';
 } else {
     $page = 'Begin';
 }
+/*
+if (isset($_POST['page'])) {
+    $page = $_POST['page'];
+}
+*/
+
+$page = Page::$pagePref.$page;
 
 
 
@@ -78,21 +78,23 @@ if ($authValid) {
 //echo '1111111111111';
 //Page::setTitle(_PROGRAM_SHORT_NAME);
 //Page::setProgramName(_PROGRAM_NAME);
-Page::showHead();
+Page::showHead($page);
 Page::showBodyStart();
-ProgramTitle::show();
-UserMenu::show($authValid);
-if ($authValid) {
+//ProgramTitle::show();
+UserMenu::show(Auth::$valid);
+if (Auth::$valid) {
     Navigation::show();
 }
 //Page::showBodyPage($page);
 //$bodyPage =  new $page;
 echo '<div class="Page">' . "\n";
 //echo $page;
-Page::show($page, $pagePref);
+Page::show($page);
 //$page::show();
 echo '</div>' . "\n";
-HtmlDebug::show();
+//PageDebug::prep('page', $page);
+//PageDebug::prep('page1111', $page);
+//PageDebug::show();
 
 Page::showBodyFinish();
 //$page = new Page();
@@ -102,4 +104,5 @@ Page::showBodyFinish();
 //$page->ShowBody("main");
 //$Page->foot();
 
+//echo '</html>' . "\n";
 ?>

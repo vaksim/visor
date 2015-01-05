@@ -1,5 +1,19 @@
 <div class="debugPanel">
-<br><?php echo DB::getQuery();?><br>
-<br><?php var_dump(HtmlMain::$arrRepairs);?><br>
-<br><?php var_dump($_POST);?><br>
+  <?php foreach(PageDebug::$arrDebug as $key => $data) { ?>
+  <?=$key?> --- <?=$data?><br>
+  <?php } ?>
+  <br>PageDebug::$arrDebug --- <?php print_r(PageDebug::$arrDebug);?>
+  <br>PageDebug::$varTmp --- <?php var_dump(PageDebug::$varTmp);?>
+  <br>PageDebug::$varTmp2 --- <?php var_dump(PageDebug::$varTmp2);?>
+  <br>PageLocomotives::$arrLocomotives<?php print_r(PageLocomotives::$arrLocomotives);?>
+  <br>$_SESSION --- <?php print_r($_SESSION);?>
+
+  <br>Auth::$valid --- <?php var_dump(Auth::$valid);?>
+  <br>User::$id --- <?php var_dump(User::$id);?>
+  <br>User::$name --- <?php var_dump(User::$name);?>
+  
+
+<!--  <br><?php echo DB::getQuery();?><br> 
+	  <br><?php var_dump(PageRepairs::$arrRepairs);?><br> -->
+  <br>POST ---- <?php var_dump($_POST);?><br>
 </div>

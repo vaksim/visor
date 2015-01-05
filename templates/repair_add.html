@@ -1,10 +1,26 @@
-<!-- Панель с кнопками -->
-<form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>?page=RepairAdd">
-  <input type="hidden" name="RepairAddSave" value="RepairAdd">
-  <input type="submit" name="but" value="Сохранить"><br>
-  Подразделение:
-  <input type="text" name="subdivision" value="<?=HtmlRepairAdd::$subdivision?>">
-  <input type="submit" name="butSub" value="..."><br>
-  Тип машины:
-</form>
+<!-- <div class="PageRepairAdd"> -->
+<div class="PageRepairAdd">
+  <div class="ControlButtons">
+	<form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+	  <input type="hidden" name="page" value="RepairAdd">
+	  <input type="submit" name="button_repair_save" value="Сохранить"><br>
+	</form>
+  </div>
+  <form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+	<table>
+	  <tr>
+		<td>Машина: </td>
+		<td><input type="text" name="locomotive_name" value="<?=PageRepairAdd::$arrRepair['locomotive_name']?>"></td>
+		<td><input type="hidden" name="div_class" value="ChildPage"></td>
+		<td><input type="hidden" name="page" value="RepairAdd"></td>
+		<td><input type="submit" name="button_locomotive" value="..."><br></td>
+	  </tr>
+	  <tr>
+		<td>Номер машины:</td>
+		<td><input type="text" name="locomotive_number" value="<?=PageRepairAdd::$arrRepair['locomotive_number']?>"></td>
+	  </tr>
+	</table>
+  </form>
+</div>
+
 

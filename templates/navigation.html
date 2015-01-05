@@ -1,3 +1,19 @@
 <div class="Navigation">
-  <a href="index.php?page=Main">Главная</a><br>
+  <!--  <a href="index.php?page=Main">Главная</a><br> -->
+  <table>
+	<tr>
+	  <?php foreach(Navigation::$arrNavigation as $key => $data) { ?>
+	  <td>
+		<form method="POST" id="<?=$key?>" action="<?=$_SERVER['PHP_SELF']?>">
+		  <!--  <div class="RemoteButton"> -->
+
+		  <?php foreach($data['vars'] as $key_vars => $value) { ?>
+		  <input form="<?=$key?>" type="hidden" name="<?=$key_vars?>" value="<?=$value?>">
+		  <?php } ?>
+		  <input form="<?=$key?>" type="submit" name="but" value="<?=$data['but_label']?>">
+		</form>
+	  </td>
+	  <?php } ?>
+	</tr>
+  </table>
 </div>

@@ -1,0 +1,18 @@
+locomotive add
+<div class="PageRepairAdd">
+  <form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>?page=RepairAdd">
+	<input type="hidden" name="RepairAddSave" value="RepairAdd">
+	<input type="submit" name="but" value="Сохранить"><br>
+	<hr>
+	<table>
+	  <?php foreach(PageRepairAdd::$arrRepair as $key => $arrRepair) { ?>
+	  <tr>
+		<td><?=$arrRepair['name']?>:</td>
+		<td><input type="text" name="<?=$key?>" value="<?=$arrRepair['data']?>"></td>
+		<td><input type="submit" name="button_<?=$key?>" value="..."><br></td>
+	  </tr>
+	  <?php } ?>
+	</table>
+	
+  </form>
+</div>

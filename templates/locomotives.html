@@ -1,0 +1,37 @@
+<div class="<?=PageLocomotives::$divClassPage?>">
+  <div class="ControlButtons">
+	<form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+	  <input type="hidden" name="page" value="LocomotiveAdd">
+	  <input type="submit" name="but" value="Добавить">
+	</form>
+  </div>
+  <table class="Table" style="border: 3px solid black">
+	<tr>
+	  <?php if (PageRepairAdd::$clickButtonLocomotive) { ?>
+	  <th>Выбор</th>
+	  <?php } ?>
+	  <th>№ п/п</th>
+	  <th>Наименование</th>
+	  <th>Номер</th>
+	</tr>
+	<?php foreach(PageLocomotives::$arrLocomotives as $key=>$arr) { ?>
+	<tr onMouseOver="this.style.backgroundColor='#ececec';"
+		onMouseOut="this.style.backgroundColor='white'">
+	  <?php if (PageRepairAdd::$clickButtonLocomotive) { ?>
+	  <td>
+		<form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+		  <input type="hidden" name="page" value="RepairAdd">
+		  <input type="hidden" name="locomotive_id" value="<?=$arr['locomotive_id']?>">
+		  <input type="hidden" name="locomotive_name" value="<?=$arr['locomotive_name']?>">
+		  <input type="hidden" name="locomotive_number" value="<?=$arr['locomotive_number']?>">	  
+		  <input type="submit" name="button_get_locomotive" value="<=">
+		  </form>
+	  </td>
+			 <?php } ?>
+	  <td><?=$arr['no']?></td>
+	  <td><?=$arr['locomotive_name']?></td>
+	  <td><?=$arr['locomotive_number']?></td>
+	</tr>
+	<?php } ?>
+  </table>
+</div>

@@ -1,5 +1,5 @@
 <?php
-class HtmlError
+class PageError
 {
     public function __construct()
     {

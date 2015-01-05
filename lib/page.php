@@ -4,17 +4,35 @@ class Page
     static private $_title = '_title';
     static private $_programName = '_programName';
     static private $_authValid = false;
+    static public $pagePref = 'Page';
+    static public $page = null;
+    static public $prevPage = null;
 
 
     private function __construct(){}
     private function __clon(){}
 
-    static public function setTitle($title)
+    static public function setTitle($title = null)
     {
-        self::$_title = $title;
+        if (isset($title)) {
+            self::$_title = SC::show('_PROGRAM_SHORT_NAME') . ' - ' . $title;
+        } else {
+            self::$_title = SC::show('_PROGRAM_SHORT_NAME');
+        }
     }
+
+    static public function getTitle()
+    {
+        return self::$_title;
+    }
+//    static public function setT
     
-    static public function showHead() {
+    static public function showHead($page) {
+        if (property_exists($page, 'pageTitle')) {
+            self::setTitle($page::$pageTitle);
+        } else {
+            self::setTitle();
+        }
         IncTpl::show('head');
 //        SC::show('_SSSS');
 /*
@@ -31,18 +49,28 @@ class Page
 
     }
 
-    static public function show($page = null, $pagePref = null)
+    static public function show($page = null)
     {
         if (!$page) {
             echo 'Page is not set...';
             return 0;
+        } else {
+            self::$page = $page;
         }
+        if (method_exists($page, 'prep')) {
+//            echo self::$page;
+            $page::prep();
+        } else {
+//            echo 'prep() in ' . $page . ' is not set...<br>';
+        }
+        if (method_exists($page, 'show')) {
+            $page::show();
+        } else {
+//            echo 'show() in ' . $page . 'is not set...<br>';
+        }
+//        echo self::$page;
 
-        if (isset($_POST['page'])) {
-            $page = $_POST['page'];
-        }
-        $page = $pagePref.$page;
-        $page::show();
+
     }
     
     static public function setProgramName($programName)
@@ -57,33 +85,24 @@ class Page
 
     static public function showBodyStart()
     {
+        self::setPrevPageFromSession();
         echo '<body bgcolor="#EDDE7D">',"\n";
-//        echo session_id();
+//        echo self::$prevPage;
 //        echo '<br>'.$_SESSION['viewNum'].'<br>';        
 //        self::showBodyHead();
+        echo '--------------' . self::$prevPage;
     }
 
     static public function showBodyPage($page = null)
     {
-        //      echo $page."<br>\n";
-        //self::showMenu();
-/*        self::$_authValid = Auth::authValid();
-        UserMenu::showMenu(self::$_authValid);
-        if (self::$_authValid) {
-            require_once('pages/'.$page.'.php');
-        } elseif (isset($_POST['loginUserName'])) {
-            self::_authError();
-*/
-        
-        
-        //  echo '[ <a href="'.'index.php'.'">'.'Главная страница'.'</a> ]<br>'."\n";
-        
-        //  if (self::$_authValid) {echo 'eeeeeeeeeeeeeeee';}
     }
 
     static public function showBodyFinish()
     {
+        self::setPrevPageToSession();
+        PageDebug::show();
         echo "\n" . '</body>' . "\n" . '</html>' . "\n";
+
     }
 
     static private function _getFirstView()
@@ -100,6 +119,18 @@ class Page
     {
         self::userMenu();        
         echo 'Вы вошли как: '.$_SESSION['loginUserName'].'<br>';
+    }
+
+
+    static public function setPrevPageToSession()
+    {
+        $_SESSION['prev_name'] = self::$page;
+    }
+    static public function setPrevPageFromSession()
+    {
+        if (isset($_SESSION['prev_name'])) {
+            self::$prevPage = $_SESSION['prev_name'];
+        }
     }
 }
 ?>

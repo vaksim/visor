@@ -1,0 +1,36 @@
+<!-- Панель с кнопками -->
+<div class="ControlButtons">
+  <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+	<input type="hidden" name="page" value="RepairAdd">
+	<input type="submit" name="button_new_repair" value="Добавить">
+  </form>  
+</div>
+<!-- Блок данных -->
+<table class="Table">
+  <tr>
+	<th>№ п/п</th>
+	<th>Подразделение</th>
+	<th>Наименование</th>
+	<th>Номер</th>
+	<th>Дата начала ремонта</th>
+	<th>Дата планируемого окончания ремонта</th>
+  </tr>
+  <?php foreach(PageRepairs::$arrRepairs as $key=>$arrLoco) { ?>
+  <tr onMouseOver="this.style.backgroundColor='#ececec';"
+	  onMouseOut="this.style.backgroundColor='white'"
+	  onclick="location.href='./tmp.html?id=<?=$arrLoco['repair_id']?>'">
+	<!-- onclick="location.href='./tmp.html?id=<?=$arrLoco['id']?>'"> -->
+	<!-- <td><?=$key + 1?></td> -->
+	<!--	  <?php print_r($arrLoco); ?> -->
+	<td><?=$arrLoco['row_number']?></td>
+	<td><?=$arrLoco['subdivision_name']?></td>
+	<td><?=$arrLoco['locomotive_name']?></td>
+	<td><?=$arrLoco['locomotive_number']?></td>
+	<td><?=$arrLoco['date_beginning']?></td>
+	<td><?=$arrLoco['date_ending']?></td>
+  </tr>
+  <?php } ?>
+</table>
+
+<!-- <a href="index.php?page=Main">Главная</a><br> -->
+<!-- <div class="userTag"> maximus </div> -->

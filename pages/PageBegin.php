@@ -1,6 +1,8 @@
 <?php
-class HtmlBegin
+class PageBegin
 {
+    static public $pageTitle = 'Авторизация';
+    
     public function __construct()
     {
         //echo '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$';

@@ -1,0 +1,33 @@
+SELECT row_number() OVER () AS No, locomotives.id AS locomotive_id, locomotive_names.id AS locomotive_name_id, locomotive_names.name AS locomotive_name, locomotives.number AS locomotive_number FROM locomotives, locomotive_names WHERE locomotives.id = locomotive_names.id;
+
+//Создание временной таблицы для PageRepairAdd
+ CREATE TABLE repair_add (
+ user_id integer NOT NULL,
+ subdivision_id integer,
+ subdivision_name text,
+ locomotive_id integer,
+ locomotive_name text,
+ locomotive_number text
+ );
+ 
+//Запрос во временную траблицу PageRepairAdd
+SELECT * FROM repair_add WHERE user_id = '1';
+
+//Создаем запись во временной таблице PageRepairAdd
+ INSERT INTO repair_add
+ (user_id)
+ VALUES (1);
+
+//Добавляем данные во временную таблица repair_add
+UPDATE repair_add
+SET
+	   subdivision_id = 1,
+	   subdivision_name = '222',
+	   locomotive_id = 1,
+	   locomotive_name = 'asdf',
+	   locomotive_number = '1111'
+WHERE user_id = 1;
+
+//Удаляем строку пользователя во временной таблице repair_add
+DELETE FROM repair_add WHERE user_id = '1';
+ 

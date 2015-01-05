@@ -6,9 +6,9 @@ class DB
     static private $_dbName = 'test';
     static private $_user;
     static private $_password = null;
-    static private $_db = null;
+    static private $_dbConn = null;
     static private $_query = null;
-    static public $_result = null;
+    static public $result = null;
         
     static public function connect($host = 'localhost', $dbName = 'test', $user = 'test', $password = null)
     {
@@ -18,8 +18,7 @@ class DB
         self::$_password = $password;
         $dbParam = 'host=' . self::$_host . ' dbname=' . self::$_dbName . ' user=' . self::$_user . ' password=' . self::$_password;
 //        echo $dbParam;
-        //self::$db =
-        @pg_connect($dbParam) or die('Cold not connect to database.');
+        self::$_dbConn = @pg_connect($dbParam) or die('Cold not connect to database.');
 //        echo 'UUUUUUUUUUUUUUUUUU';
         //return $db;
     }
@@ -32,6 +31,12 @@ class DB
     static public function getQuery()
     {
         return self::$_query;
+    }
+
+    static public function query($query)
+    {
+        self::setQuery($query);
+        self::setResult(pg_query(self::getQuery()));
     }
 
     static public function connection()
@@ -48,23 +53,26 @@ class DB
     {
         if (!$result) {
             echo "<br>Ошибка в запросе<br>\n";
-            self::$_result = $result;
+            self::$result = $result;
         } else {
 //            echo 'llllllllllll' . $result . 'ssssssssssssssss';
-            self::$_result = $result;
+            self::$result = $result;
         }
     }
 
     static public function getResult()
     {
-        if (!self::$_result) {
+        if (!self::$result) {
             echo "<br>Запрос не сформирован<br>\n";
         } else {
 //            echo 'llllllllllll' . $result . 'ssssssssssssssss';
-            return self::$_result;
+            return self::$result;
         }
-        
+    }
 
+    static public function getDbConn()
+    {
+        return self::$_dbConn;
     }
 }
 ?>
