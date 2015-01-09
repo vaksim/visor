@@ -1,0 +1,111 @@
+<?php
+/*
+Принимает из POST
+
+
+
+
+*/
+?>
+<table class="Table">
+  <tr>
+	<?php for ($i = 1; $i < 4; $i++) { ?>
+          <th style="width: 200px">
+			<?php if (($i === 1) || ($i === 3)) { 
+				  if ($i === 1) {
+				  $otherYear = PageCalendar::$selectedYear - 1;
+				  } else {
+				  $otherYear = PageCalendar::$selectedYear + 1;
+				  }?>
+<form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+  <input type="hidden" name="div_class" value="ChildPage">
+  <input type="hidden" name="selected_year" value="<?=$otherYear?>">
+<?=PageCalendar::tplVars()?>
+<?php if (isset(PageCalendar::$prevPageButton)) { ?>
+<input type="hidden" name="button" value="<?=PageCalendar::$prevPageButton?>">
+  <input type="submit" name="<?=PageCalendar::$prevPageButton?>" value="Календарь на <?=$otherYear?> год" style="width: 100%">
+<?php } ?>
+</form>
+			<?php } else { ?>
+            Календарь на <?=PageCalendar::$selectedYear?> год
+			<?php } ?>
+          </th>
+		  <?php } ?>
+  </tr>
+  <?php
+	 $quarter = 1;
+     $monthNumber = 1;
+
+	 foreach(PageCalendar::$months as $value) {
+         if ($quarter === 1) { ?>
+  <tr>
+	<?php }
+         $quarter++; ?>
+    <th>
+	  <?=$value?>
+    </th>
+	<?php if ($quarter === 4) {
+		  $quarter = 1;?>
+  </tr>
+  <tr>
+	<?php for ($x = 1; $x < 4; $x++) {
+       $firstDayWeekMonth = (date("N", mktime(0, 0, 0, $monthNumber, 1, PageCalendar::$selectedYear)));
+       $numberDaysMonth = (date("t", mktime(0, 0, 0, $monthNumber, 1, PageCalendar::$selectedYear)));
+//       $dayMonth = (date("j", mktime(0, 0, 0, $monthNumber, 1, 2015)));
+       $day = 2 - $firstDayWeekMonth;
+
+?>
+		  <td>
+			<table class="Table" style="width: 100%; height: 180px">
+			  <tr>
+				<?php foreach(PageCalendar::$days as $value) { ?>
+                <th>
+				  <?=$value?>
+                </th>
+				<?php } ?>
+              </tr>
+			  <?php $cell = 1;
+                //$firstDayMonth = (date("N", mktime(0, 0, 0, 1, 1, 2015)));
+                    for ($weekMonth = 1; $weekMonth < 7; $weekMonth++) { ?>
+                    <tr>
+					  <?php for ($weekDay = 1; $weekDay < 8; $weekDay++) { ?>
+                            <td style="color: gray;">
+						  <?php
+                          $date = (date("d", mktime(0, 0, 0, $monthNumber, $day, PageCalendar::$selectedYear)));
+                             //echo $monthNumber;
+                 if ($firstDayWeekMonth == $weekDay) {
+                     $firstDayWeekMonth = null;
+                     
+                 }
+//                 if  (isset($day)) {
+                 if (($day <= 0) || ($day > $numberDaysMonth)) {
+                     //echo '<td style="color: gray;">';
+                     echo $date;
+                     } else { ?>
+                              <form style="padding-bottom: 0px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+
+<?=PageCalendar::tplVars()?>
+<input type="submit" name="button_date_get" value="<?=$date?>">
+<input type="hidden" name="<?=PageCalendar::$nameValue?>" value="<?=(date("d.m.Y", mktime(0, 0, 0, $monthNumber, $day, PageCalendar::$selectedYear)));?>">
+</form>
+<?php }
+                     
+                     //echo $date;
+                     // echo (date("d", mktime(0, 0, 0, $monthNumber, $day, PageCalendar::$selectedYear)));
+                     $day++;
+//                     } //else { $day = null; }
+                     //                   }
+//                       echo (date("d", mktime(0, 0, 0, $monthNumber, $day, 2015)));
+								 ?></td>
+							<?php $cell++; } ?>
+                    </tr>
+					<?php } ?>
+			</table>
+          </td>
+		  <?php $monthNumber++;
+          }
+?>
+  </tr>
+  <?php }} ?>
+
+</table>

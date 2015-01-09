@@ -3,7 +3,7 @@ class Navigation
 {
     static public $arrNavigation = array(
         'Repairs' => array(
-            'but_label' => 'Ремонтыssssss',
+            'but_label' => 'Ремонты',
             'vars' => array(
                 'page' => 'Repairs'
             )

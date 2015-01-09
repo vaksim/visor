@@ -100,7 +100,7 @@ class Page
     static public function showBodyFinish()
     {
         self::setPrevPageToSession();
-        PageDebug::show();
+//        PageDebug::show();
         echo "\n" . '</body>' . "\n" . '</html>' . "\n";
 
     }

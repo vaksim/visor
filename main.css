@@ -154,6 +154,7 @@ textarea      { font-size: 12px; }
 	top: 125px;
 	left: 300px;
 	right: 5px;
+	bottom: 5px;
 	background: yellow;
 	padding: 5px;
 	overflow: auto;
@@ -244,4 +245,16 @@ textarea      { font-size: 12px; }
 .Table td {
 	padding: 2px;
 	border: 1px solid black;
+}
+
+.TableClear table {
+	border: 2px solid black;
+}
+
+.TableClear th {
+	padding: 2px;
+}
+
+.TableClear td {
+	padding: 2px;
 }

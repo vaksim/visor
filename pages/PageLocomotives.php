@@ -12,9 +12,9 @@ class PageLocomotives
         self::$arrLocomotives = pg_fetch_all(DB::getResult());
         self::$divClassPage = $_POST['div_class'];
     }
-    static public function show()
+    static public function show($divClassPage = null)
     {
-        IncTpl::show('Locomotives');
+        IncTpl::show('Locomotives', $divClassPage);
     }
 
     static public function add()

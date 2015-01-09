@@ -1,26 +1,60 @@
-<!-- <div class="PageRepairAdd"> -->
+<?php
+PageRepairAdd::$arrTpl['1']['title'] = 'Подразделение:';
+PageRepairAdd::$arrTpl['1']['value'] = PageRepairAdd::$arrRepair['subdivision_name'];
+PageRepairAdd::$arrTpl['2']['title'] = 'Машина:';
+PageRepairAdd::$arrTpl['2']['value'] = PageRepairAdd::$arrRepair['locomotive_name'];
+PageRepairAdd::$arrTpl['2']['button'] = 'button_locomotive';
+PageRepairAdd::$arrTpl['3']['title'] = 'Номер машины:';
+PageRepairAdd::$arrTpl['3']['value'] = PageRepairAdd::$arrRepair['locomotive_number'];
+PageRepairAdd::$arrTpl['4']['title'] = 'Дата начала ремонта:';
+PageRepairAdd::$arrTpl['4']['value'] = PageRepairAdd::$arrRepair['date_beginning'];
+PageRepairAdd::$arrTpl['4']['button'] = 'button_date_beginning';
+PageRepairAdd::$arrTpl['4']['hidden']['name_value'] = 'date_beginning';
+PageRepairAdd::$arrTpl['4']['hidden']['button'] = PageRepairAdd::$arrTpl['4']['button'];
+PageRepairAdd::$arrTpl['5']['title'] = 'Дата оконания ремонта:';
+PageRepairAdd::$arrTpl['5']['value'] = PageRepairAdd::$arrRepair['date_ending'];
+PageRepairAdd::$arrTpl['5']['button'] = 'button_date_ending';
+PageRepairAdd::$arrTpl['5']['hidden']['name_value'] = 'date_ending';
+PageRepairAdd::$arrTpl['5']['hidden']['button'] = PageRepairAdd::$arrTpl['5']['button'];
+/*   'Машина:' => '123',
+/*   'Номер машины:' => null,
+'Дата начала ремонта:' => null
+);*/
+PageDebug::$arrDebug = PageRepairAdd::$arrTitles;
+?>
 <div class="PageRepairAdd">
   <div class="ControlButtons">
 	<form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
-	  <input type="hidden" name="page" value="RepairAdd">
-	  <input type="submit" name="button_repair_save" value="Сохранить"><br>
+      <input type="hidden" name="page" value="RepairAdd">
+      <input type="submit" name="button_save" value="Сохранить"><br>
 	</form>
   </div>
-  <form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
-	<table>
-	  <tr>
-		<td>Машина: </td>
-		<td><input type="text" name="locomotive_name" value="<?=PageRepairAdd::$arrRepair['locomotive_name']?>"></td>
-		<td><input type="hidden" name="div_class" value="ChildPage"></td>
-		<td><input type="hidden" name="page" value="RepairAdd"></td>
-		<td><input type="submit" name="button_locomotive" value="..."><br></td>
-	  </tr>
-	  <tr>
-		<td>Номер машины:</td>
-		<td><input type="text" name="locomotive_number" value="<?=PageRepairAdd::$arrRepair['locomotive_number']?>"></td>
-	  </tr>
-	</table>
-  </form>
+  <table class="TableClear">
+<?php foreach(PageRepairAdd::$arrTpl as $key => $arr) { ?>
+    <tr>
+      <td><?=$arr['title']?></td>
+<?php if (isset($arr['value'])) { ?>
+      <td><?=$arr['value']?></td>
+<?php } else { ?>
+      <td></td>
+<?php } ?>
+<?php if (isset($arr['button'])) { ?>
+      <td>
+		<?=PageRepairAdd::repairAddFormHead();
+		if (isset($arr['hidden'])) {
+		   foreach($arr['hidden'] as $hiddenName => $hiddenValue) { ?>
+		<input type="hidden" name="<?=$hiddenName?>" value="<?=$hiddenValue?>">
+		<?php }
+		} ?>
+        <input type="submit" name="<?=$arr['button']?>" value="...">
+        </form>
+      </td>
+<?php } else { ?>
+      <td></td>
+<?php } ?>
+    </tr>
+<?php } ?>
+  </table>
 </div>
 
 
