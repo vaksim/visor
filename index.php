@@ -8,20 +8,10 @@ $authValid = false;
 $pagePref = 'Page';
 $page = 'Clear';
 
-
-//if (isset($_SESSION['viewNum'])) {
-//    $_SESSION['viewNum']++;
-//} else {
-//    $_SESSION['viewNum'] = 1;
-// }
-//echo '<br>'.$_SESSION['viewNum'].'<br>';
-
-
 function userExit() // Если $_GET['exit'] = true то уничтожить сессию и перечитать скрипт
 {
     if ((isset($_GET['exit'])) && ($_GET['exit']=='true')) {
         session_destroy();
-        //       session_start();
         header("Location: " . $_SERVER['PHP_SELF']);
     }
 }
@@ -30,11 +20,6 @@ userExit();
 
 require_once("lang/ru.php");
 require_once("lib/var.php");
-
-//require_once("lib/auth.php");
-//include ("lib/page.php");
-//include ("pages/main.php");
-//ffff
 
 function __autoload($className)
 {

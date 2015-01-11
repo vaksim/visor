@@ -1,0 +1,66 @@
+<div class="PageRepairAdd">
+  <div class="ControlButtons">
+  <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+      <input type="hidden" name="page" value="<?=AddForm::$page?>">
+      <input type="submit" name="button_save" value="Сохранить"><br>
+	</form>
+  </div>
+  <table class="TableClear">
+<?php 
+     $tplObjTypes = array('title', 'label');
+
+foreach(AddForm::$tpl as $tplKey => $tplObj) { 
+    echo "<tr>\n";
+    foreach($tplObjTypes as $tplObjType) { 
+        showTplObj($tplObjType, $tplObj);
+    }
+
+if (isset($tplObj['buttons'])) {
+    foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
+        echo "<td>\n"; ?>
+<form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+<input type="hidden" name="div_class" value="ChildPage">
+<input type="hidden" name="page" value="<?=AddForm::$page?>">
+<?php
+ 
+
+
+ //AddForm::addFormHead();
+
+         //_addFormHead();
+        if (isset($buttonValue['values'])) {
+        foreach($buttonValue['values'] as $valueName) { ?>
+		<input type="hidden" name="<?=$valueName['name']?>" value="<?=$valueName['var']?>">
+<?php		 }} 
+ /*  echo '1';
+
+/*        if (isset($buttonValue['vars'])) {
+        foreach($buttonValue['vars'] as $varName) { ?>
+<input type="hidden" name="<?=$varName?>" value="<?=$varName?>">
+<?php }}*/ ?>
+<input type="submit" name="<?=$buttonValue['name']?>" value="...">
+</form>
+<?php
+        echo "</td>\n";
+    }
+} else {
+    echo "<td></td>\n";
+} 
+echo "</tr>\n";
+}
+echo "</table>\n";
+?>
+</div>
+
+<?php
+function showTplObj($tplObjType, $tplObj)
+{
+    if (isset($tplObj[$tplObjType])) {
+        foreach($tplObj[$tplObjType] as $titleNumber => $titleValue) {
+            echo "<td>$titleValue</td>\n";
+        }
+    } else {
+        echo "<td></td>\n";
+    }
+}
+?>

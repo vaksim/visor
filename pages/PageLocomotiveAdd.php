@@ -1,35 +1,29 @@
 <?php
-class PageLocomotiveAdd
+class PageLocomotiveAdd extends PageAddForm
 {
-    static public $from = null;
-    
-    static public $arrLocomotive = array(
-        'locomotive' => array(
-            'name' => 'Машина',
-            'data' => '-'
-        ),
-        'locomotive_number' => array(
-            'name' => 'Номер',
-            'data' => '-'
-        ),
-        'date_begining' => array(
-            'name' => 'Дата начала ремонта',
-            'data' => '-'
-        ),
-        'date_ending' => array(
-            'name' => 'Дата окончания ремонта',
-            'data' => '-'
-        )
-    );
-
+    static public function prepVars()
+    {
+        self::$vars['locomotive_id'] = null;
+        self::$vars['locomotive_name'] = null;
+        self::$vars['locomotive_number'] = null;
+        self::$vars['locomotive_name_id'] = null;
+    }
+    static public function prepTpl()
+    {
+      self::$tpl['1']['title'] = 'Наименование машины:';
+      self::$tpl['1']['value'] = self::$vars['locomotive_name'];
+      self::$tpl['1']['button'] = 'button_locomotive_name';
+      self::$tpl['1']['vars']['1'] = 'locomotive_name_id';
+      self::$tpl['1']['vars']['2'] = 'locomotive_name';
+    }
+    static public function prepButtons()
+    {
+        self::$buttons['button_locomotive_name'] ='PageLocomotiveNames';
+    }
     static public function prep()
     {
-//        self::$from = $from;
+        AddForm::prep(get_class());
     }
-    
-    static public function show()
-    {
-        IncTpl::show('locomotive_add');
-    }
+
 }
 ?>

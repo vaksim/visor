@@ -21,18 +21,20 @@ name="button_date_get" value="<?=$date?>">
 name="<?=PageCalendar::$nameValue?>" value="<?=(date("d.m.Y", mktime(0, 0, 0
 
 */
-class PageCalendar
+class Calendar
 {
+    static public $divClassPage = null;
     static public $prevPage = null;
     static public $prevPageButton = null;
-    static public $nameValue = null;
+    static public $nameValue = null; //Имя переменной возвращаемое формой
     static public $selectedYear = null;
     static public $months = array(1 => 'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Нобябь', 'Декабрь');
     static public $days = array('Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс');
     
     
-    static public function prep()
+    static public function prep($divClassPage = null)
     {
+        self::$divClassPage = $divClassPage;
         if (isset($_POST['name_value'])) {
             self::$nameValue = $_POST['name_value'];
         }
@@ -51,13 +53,13 @@ class PageCalendar
     }
     static public function show($divClassPage = null)
     {
-        IncTpl::show('calendar', $divClassPage);
-        PageDebug::$varTmp2 = self::$prevPageButton;
+        IncTpl::show('calendar', get_class(), self::$divClassPage);
+//        PageDebug::$varTmp2 = self::$prevPageButton;
     }
 
     static public function tplVars()
     {
-        IncTpl::show('calendar_vars');
+        IncTpl::show('calendar_vars', get_class());
     }
 }
 

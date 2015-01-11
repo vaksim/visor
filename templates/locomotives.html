@@ -1,22 +1,22 @@
   <div class="ControlButtons">
 	<form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
 	  <input type="hidden" name="page" value="LocomotiveAdd">
-	  <input type="submit" name="but" value="Добавить">
+	  <input type="submit" name="button_new" value="Добавить">
 	</form>
   </div>
   <table class="Table" style="border: 3px solid black">
 	<tr>
-	  <?php if (PageRepairAdd::$arrButtons['button_locomotive']['click']) { ?>
+	  <?php if (isset(AddForm::$buttons['button_locomotive']['click'])) { ?>
 	  <th>Выбор</th>
 	  <?php } ?>
-	  <th>№ п/п</th>
+	  <th>№ п/п0000</th>
 	  <th>Наименование</th>
 	  <th>Номер</th>
 	</tr>
 	<?php foreach(PageLocomotives::$arrLocomotives as $key=>$arr) { ?>
 	<tr onMouseOver="this.style.backgroundColor='#ececec';"
 		onMouseOut="this.style.backgroundColor='white'">
-	  <?php if (PageRepairAdd::$arrButtons['button_locomotive']['click']) { ?>
+	  <?php if (isset(AddForm::$buttons['button_locomotive']['click'])) { ?>
 	  <td>
 		<form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
 		  <input type="hidden" name="page" value="RepairAdd">
@@ -27,7 +27,7 @@
 		  </form>
 	  </td>
 			 <?php } ?>
-	  <td><?=$arr['no']?></td>
+	  <td><?=$arr['row_number']?></td>
 	  <td><?=$arr['locomotive_name']?></td>
 	  <td><?=$arr['locomotive_number']?></td>
 	</tr>

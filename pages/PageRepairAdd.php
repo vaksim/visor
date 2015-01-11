@@ -1,75 +1,107 @@
 <?php
-class PageRepairAdd
+class PageRepairAdd extends PageAddForm
 {
-    static public $clickButtonLocomotive = false;
-    static public $arrRepair = array(
-        'subdivision_id' => 1,
-        'subdivision_name' => 'Черепаново',
-        'locomotive_id' => null,
-        'locomotive_name' => null,
-        'locomotive_number' => null,
-        'date_beginning' => null,
-        'date_ending' => null
-    );
-    static public $arrButtons = array(
-        'button_subdivision' => array(
-            'click' => false,
-            'page' => 'PageSubdivision'
-        ),
-        'button_locomotive' => array(
-            'click' => false,
-            'page' => 'PageLocomotives'
-        ),
-        'button_date_beginning' => array(
-            'click' => false,
-            'page' => 'PageCalendar'
-        ),
-        'button_date_ending' => array(
-            'click' => false,
-            'page' => 'PageCalendar'
-        )
-    );
+    static public function prepVars()
+    {
+        self::$vars['subdivision_id'] = 1;
+        self::$vars['subdivision_name'] ='Черепаново';
+        self::$vars['locomotive_id'] = null;
+        self::$vars['locomotive_name'] = null;
+        self::$vars['locomotive_number'] = null;
+        self::$vars['date_beginning'] = null;
+        self::$vars['date_ending'] = null;
+    }
 
-    static public $arrTitles = array();
-    static public $arrTpl = array();
-    static public $arrRepairTmp = array(
-        'subdivision' => array(
-            'name' => 'Подразделение',
-            'data' => '-'
-        ),
-        'locomotive_name' => array(
-            'name' => 'Машина:',
-            'data' => '-'
-        ),
-        'locomotive_number' => array(
-            'name' => 'Номер',
-            'data' => '-'
-        ),
-        'date_begining' => array(
-            'name' => 'Дата начала ремонта',
-            'data' => '-'
-        ),
-        'date_ending' => array(
-            'name' => 'Дата окончания ремонта',
-            'data' => '-'
-        )
-    );
+    static public function prepTpl()
+    {
+        self::$tpl[1]['title'][1] = 'Подразделение:';
+        self::$tpl[1]['label'][1] = self::$vars['subdivision_name'];
+        self::$tpl[2]['title'][1] = 'Машина:';
+        self::$tpl[2]['label'][1] = self::$vars['locomotive_name'];
+        self::$tpl[2]['buttons'][1]['name'] = 'button_locomotive';
+        self::$tpl[2]['buttons'][1]['page'] = 'PageLocomotives';
+        self::$tpl[2]['buttons'][1]['vars'][1] = 'locomotive_id';
+        self::$tpl[2]['buttons'][1]['vars'][2] = 'locomotive_name';
+        self::$tpl[2]['buttons'][1]['vars'][3] = 'locomotive_number';
+/*
+        self::$tpl['2']['vars']['1'] = 'locomotive_id';
+        self::$tpl['2']['vars']['2'] = 'locomotive_name';
+        self::$tpl['2']['vars']['3'] = 'locomotive_number';
+*/
 
+        self::$tpl[3]['title'][1] = 'Номер машины:';
+        self::$tpl[3]['label'][1] = self::$vars['locomotive_number'];
+
+        self::$tpl[4]['title'][1] = 'Дата начала ремонта:';
+        self::$tpl[4]['label'][1] = self::$vars['date_beginning'];
+        self::$tpl[4]['buttons'][1]['name'] = 'button_date_beginning';
+        self::$tpl[4]['buttons'][1]['page'] = 'Calendar';
+        self::$tpl[4]['buttons'][1]['values'][1]['name'] = 'name_value';
+        self::$tpl[4]['buttons'][1]['values'][1]['var'] = 'date_beginning';
+
+        self::$tpl[5]['title'][1] = 'Дата окончания ремонта:';
+        self::$tpl[5]['label'][1] = self::$vars['date_ending'];
+        self::$tpl[5]['buttons'][1]['name'] = 'button_date_ending';
+        self::$tpl[5]['buttons'][1]['page'] = 'Calendar';
+        self::$tpl[5]['buttons'][1]['values'][1]['name'] = 'name_value';
+        self::$tpl[5]['buttons'][1]['values'][1]['var'] = 'date_ending';
+
+
+//        self::$tpl[4]['buttons'][1]['hidden'][1]['button'] = self::$tpl[4]['buttons'][1]['name'];
+
+//        self::$tpl['4']['button'] = 'button_date_beginning';
+
+/*        self::$tpl[4]['hidden'][1]['name_value'] = 'date_beginning';
+        self::$tpl[4]['hidden'][1]['button'] = self::$tpl[4]['buttons'][1]['name'];
+/*
+        self::$tpl['5']['title'] = 'Дата оконания ремонта:';
+        self::$tpl['5']['label'] = self::$vars['date_ending'];
+
+        self::$tpl['5']['button']['name'] = 'button_date_ending';
+        self::$tpl['5']['button']['page'] = 'Calendar';
+
+//        self::$tpl['5']['button'] = 'button_date_ending';
+        self::$tpl['5']['hidden']['name_value'] = 'date_ending';
+        self::$tpl['5']['hidden']['button'] = self::$tpl['5']['button'];
+*/
+    }
+    static public function prepButtons()
+    {
+        //Кнопки
+        self::$buttons['button_subdivision'] ='PageSubdivision';
+        self::$buttons['button_locomotive'] ='PageLocomotives';
+        self::$buttons['button_date_beginning'] ='Calendar';
+        self::$buttons['button_date_ending'] ='Calendar';
+    }
+/*
+    static public $vars = array();
+    static public $buttons = array();
+    static public $tpl = array();
+*/
     static public function prep()
     {
+        AddForm::prep(get_class());
+    }
+/*
+    static public function show()
+    {
+        AddForm::show();
+    }
+*/
+/*--------------------------------------------------------------------------------
         if (isset($_POST['button_repair_new'])) { //В предыдущем сеансе была
                                                   //нажата кнопка Добавить
                                                   //Значить инициализируем переменные
 //            DB::query(' DELETE FROM repair_add WHERE user_id = \'' . User::$id . '\';');
-            foreach(self::$arrRepair as $key => $value) {
+            foreach(self::$vars as $key => $value) {
                 $_SESSION[$key] = $value;
             }
         }
-
+/*--------------------------------------------------------------------------------*/
 /*            
         }
         $sql = 'SELECT ';
-        foreach(self::$arrRepair as $key => $value) {  //
+        foreach(self::$vars as $key => $value) {  //
             $sql = $sql . ' ' . $key . ',';
         }
         $sql = rtrim($sql, ',');
@@ -82,8 +114,8 @@ class PageRepairAdd
         if (@pg_num_rows(DB::getResult()) !== 0) { //Если строчка найдена то заносим 
                                                    //данные в массив для шаблона
             while ($row =  @pg_fetch_assoc(DB::getResult())) {
-                foreach(self::$arrRepair as $key => $value) {               
-                self::$arrRepair[$key] = $row[$key];
+                foreach(self::$vars as $key => $value) {               
+                self::$vars[$key] = $row[$key];
                 }
             }
             
@@ -97,6 +129,8 @@ class PageRepairAdd
             self::_buttonSubdivision();
         }
 */
+
+/*----------------------------------------------------------------------------
         foreach(self::$arrButtons as $key => $arr) {
             if (isset($_POST[$key])) { //В предыдущем сеансе была нажата к
                 //нопка выбора машины
@@ -106,60 +140,59 @@ class PageRepairAdd
                 $arr['page']::prep();
             }
         }
+
+/*-----------------------------------------------------------------------------*/
         /*
 //Проверяем есть-ли данные из дочерних форм
 //попутно сформируем строку для запроса для формаирования формы
         $change = false;
         $sql = 'UPDATE repair_add SET';
-        foreach(self::$arrRepair as $key => $value) {
+        foreach(self::$vars as $key => $value) {
             if (isset($_POST[$key]) && ($_POST[$key])) {
-                self::$arrRepair[$key] = $_POST[$key];
+                self::$vars[$key] = $_POST[$key];
                 $change = true;
             }
-            if (isset(self::$arrRepair[$key])) {
-                $sql = $sql . ' ' . $key . ' = \'' . self::$arrRepair[$key] . '\',';
+            if (isset(self::$vars[$key])) {
+                $sql = $sql . ' ' . $key . ' = \'' . self::$vars[$key] . '\',';
             }
         }
         $sql = rtrim($sql, ',');
         $sql = $sql . ' WHERE user_id = ' . User::$id . ';';
         //Заносим данные во временную таблица repair_add
-        PageDebug::$arrDebug = self::$arrRepair;
+        PageDebug::$arrDebug = self::$vars;
         if ($change) {
             DB::query($sql);
         }
 */
-        foreach(self::$arrRepair as $key => $value) {
+/*---------------------------------------------------------------------
+        foreach(self::$vars as $key => $value) {
             if (isset($_POST[$key])) {
-                self::$arrRepair[$key] = $_POST[$key];
-                $_SESSION[$key] = self::$arrRepair[$key];
+                self::$vars[$key] = $_POST[$key];
+                $_SESSION[$key] = self::$vars[$key];
             } else {
-                self::$arrRepair[$key] = $_SESSION[$key];
+                self::$vars[$key] = $_SESSION[$key];
             }
         }
         
-/*        foreach(self::$arrRepair as $key => $value) {
-            $_SESSION[$key] = $value;
-        }
-*/
         //Формируем запрос для добавления ремонта
-        if (isset($_POST['button_save'])) {
-            foreach(self::$arrRepair as $key => $value) {
+        if (isset($_POST['button_save'])) { 
+            foreach(self::$vars as $key => $value) {
                 if (isset($_POST[$key])) {
-                    self::$arrRepair[$key] = $_POST[$key];
-                    $_SESSION[$key] = self::$arrRepair[$key];
+                    self::$vars[$key] = $_POST[$key];
+                    $_SESSION[$key] = self::$vars[$key];
                 } else {
-                    self::$arrRepair[$key] = $_SESSION[$key];
+                    self::$vars[$key] = $_SESSION[$key];
                 }
             }
         }
-
+-----------------------------------------------------------------------------*/
 //        PageDebug::$arrDebug = self::$arrButtons;
 //        PageDebug::$varTmp = self::$arrButtons['button_locomotive']['click'];
 //        PageDebug::$varTmp2 = self::$arrButtons;
-    }
+        
+//    }
     
-    static public function show()
-    {
+/*
         IncTpl::show('repair_add');
         $divClassPage = null;
         if (isset($_POST['div_class'])) {
@@ -169,15 +202,16 @@ class PageRepairAdd
             if ($arr['click']) {                     //была нажата какая-то кнопка 
                 $arr['page']::show($divClassPage);   //показываем страницу
             }
-        }
-    }
+            }
 
-    static public function buttonClick($button)
+    }
+*/
+/*    static public function buttonClick($button)
     {
 /*        if (!isset($_POST['$button'])) {
             
           return 1;
-          }*/
+          }
         switch ($button) {
         case 'button_subdivision':
             self::_buttonSubdivision();
@@ -191,12 +225,14 @@ class PageRepairAdd
         default: return 1;
         }
     }
-
+*/
+/*
     static private function _buttonSubdivision()
     {
         IncTpl::show('button_subdivision');
     }
-
+*/
+/*
     static private function _buttonLocomotive()
     {
         //   IncTpl::show('button_locomotive');
@@ -209,5 +245,11 @@ class PageRepairAdd
     {
         IncTpl::show('repair_add_form');
     }
+/*
+    static public function prepVars()
+    {
+    
+    }
+*/
 }
 ?>

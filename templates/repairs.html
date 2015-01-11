@@ -2,7 +2,7 @@
 <div class="ControlButtons">
   <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
 	<input type="hidden" name="page" value="RepairAdd">
-	<input type="submit" name="button_repair_new" value="Добавить">
+	<input type="submit" name="button_new" value="Добавить">
   </form>  
 </div>
 <!-- Блок данных -->
@@ -15,7 +15,7 @@
 	<th>Дата начала ремонта</th>
 	<th>Дата планируемого окончания ремонта</th>
   </tr>
-  <?php foreach(PageRepairs::$arrRepairs as $key=>$arrLoco) { ?>
+  <?php foreach(PageRepairs::$vars as $key=>$arrLoco) { ?>
   <tr onMouseOver="this.style.backgroundColor='#ececec';"
 	  onMouseOut="this.style.backgroundColor='white'"
 	  onclick="location.href='./tmp.html?id=<?=$arrLoco['repair_id']?>'">

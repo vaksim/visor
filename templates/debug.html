@@ -2,18 +2,18 @@
   <?php foreach(PageDebug::$arrDebug as $key => $data) { ?>
   <?=$key?> --- <?=$data?><br>
   <?php }
+        $var = 123;
 		$date = new DateTime('2000-01-01', new DateTimeZone('Pacific/Nauru'));
 		echo $date->format('d-m-Y') . "\n";
+        echo $var;
   
   echo 'getDate - ' . getDate();
 		?>
   <br>PageDebug::$arrDebug --- <?php print_r(PageDebug::$arrDebug);?>
   <br>PageDebug::$varTmp --- <?php var_dump(PageDebug::$varTmp);?>
   <br>PageDebug::$varTmp2 --- <?php var_dump(PageDebug::$varTmp2);?>
-  <br>PageLocomotives::$arrLocomotives<?php print_r(PageLocomotives::$arrLocomotives);?>
-  <br>$_SESSION --- <?php print_r($_SESSION);?>
 
-<!--  <br><?php echo DB::getQuery();?><br> 
-	  <br><?php var_dump(PageRepairs::$arrRepairs);?><br> -->
+  <br>$_SESSION --- <?php print_r($_SESSION);?>
   <br>POST ---- <?php var_dump($_POST);?><br>
+
 </div>

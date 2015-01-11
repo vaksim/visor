@@ -1,0 +1,46 @@
+<div class="ControlButtons">
+  <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+	<input type="hidden" name="page" value="<?=Table::$addPage?>">
+	<input type="submit" name="button_new" value="Добавить">
+  </form>  
+</div>
+<table class="Table">
+<tr>
+  <?php //if (isset(AddForm::$buttons['button_locomotive']['click'])) { 
+if (isset(AddForm::$buttonName)) { ?>
+	  <th>Выбор</th>
+	  <?php } ?>
+<?php foreach(Table::$heads as $headName => $headValue) { ?>
+<th><?=$headValue?></th>
+<?php } ?>
+</tr>
+<?php foreach(Table::$data as $data) { ?>
+<tr onMouseOver="this.style.backgroundColor='#ececec';"
+	  onMouseOut="this.style.backgroundColor='white'">
+	  <?php if (isset(AddForm::$buttonName)) { ?>
+	  <td>
+<form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+  <input type="hidden" name="page" value="<?=Table::$page?>">
+<?php
+   foreach(AddForm::$tpl as $tplKey => $tplObj) {
+      if (isset($tplObj['buttons'])) {
+          foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
+          if (isset($buttonValue['vars'])) {
+            foreach($buttonValue['vars'] as $varName) {
+?>
+		<input type="hidden" name="<?=$varName?>" value="<?=$data[$varName]?>">
+		<?php 
+            }}}}}
+
+      ?>
+  <input type="submit" name="button_get" value="<=">
+</form>
+	  </td>
+			 <?php } ?>
+
+<?php foreach(Table::$heads as $headName => $varValue) { ?>
+<td><?=$data[$headName]?></td>
+<?php } ?>
+</tr>
+<?php } ?>
+</table>

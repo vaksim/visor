@@ -30,4 +30,6 @@ WHERE user_id = 1;
 
 //Удаляем строку пользователя во временной таблице repair_add
 DELETE FROM repair_add WHERE user_id = '1';
- 
+
+//Добавляет дополнительную колонку в таблицу
+ALTER TABLE repairs ADD COLUMN open bool NOT NULL DEFAULT true;

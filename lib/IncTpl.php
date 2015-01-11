@@ -1,18 +1,22 @@
 <?php
 class IncTpl
 {
-    static private $_tplPath = './templates/';
+    static private $_tplPagePath = './templates/';
+    static private $_tplLibPath = './lib/';
     static private $_tplExtension = '.html';
     static private $_tplFile = null;
     static public $divClassPage = null;
     
-    static public function show($tpl, $divClassPage = null)
+    static public function show($tpl, $className = null, $divClassPage = null)
     {
-        self::$_tplFile = self::$_tplPath . $tpl . self::$_tplExtension;
+        if (!isset($className)) {
+            self::$_tplFile = self::$_tplPagePath . $tpl . self::$_tplExtension;
+        } else {
+            self::$_tplFile = self::$_tplLibPath . $className . '/' . $tpl . self::$_tplExtension;
+        }
         if (file_exists(self::$_tplFile)) {
             if (isset($divClassPage)) {
                 echo '<div class="' . $divClassPage . '">';
-//                self::$divClassPage = $divClassPage;
                 include(self::$_tplFile);
                 echo '</div>';
             } else {
