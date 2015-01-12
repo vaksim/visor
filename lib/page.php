@@ -90,7 +90,7 @@ class Page
 //        echo self::$prevPage;
 //        echo '<br>'.$_SESSION['viewNum'].'<br>';        
 //        self::showBodyHead();
-        echo '--------------' . self::$prevPage;
+//        echo '--------------' . self::$prevPage;
     }
 
     static public function showBodyPage($page = null)

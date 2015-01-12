@@ -34,7 +34,9 @@ function __autoload($className)
     return 1;
 }
 
+
 //self::showMenu();
+DB::connect( "localhost", "visor", "visor", "123");
 Auth::authValid();
 
 if (Auth::$valid) {
@@ -65,7 +67,7 @@ $page = Page::$pagePref.$page;
 //Page::setProgramName(_PROGRAM_NAME);
 Page::showHead($page);
 Page::showBodyStart();
-//ProgramTitle::show();
+ProgramTitle::show();
 UserMenu::show(Auth::$valid);
 if (Auth::$valid) {
     Navigation::show();

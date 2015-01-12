@@ -18,7 +18,7 @@ class DB
         self::$_password = $password;
         $dbParam = 'host=' . self::$_host . ' dbname=' . self::$_dbName . ' user=' . self::$_user . ' password=' . self::$_password;
 //        echo $dbParam;
-        self::$_dbConn = @pg_connect($dbParam) or die('Cold not connect to database.');
+        self::$_dbConn = @pg_connect($dbParam) or die('Cold not connect to database.' . $dbParam);
 //        echo 'UUUUUUUUUUUUUUUUUU';
         //return $db;
     }

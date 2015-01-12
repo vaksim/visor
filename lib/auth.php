@@ -10,7 +10,7 @@ class Auth
     }
     static public function authValid()
     {
-        DB::connect( "localhost", "visor", "chrbu01", "123");
+//        DB::connect( "localhost", "visor", "chrbu01", "123");
 
         if (isset($_SESSION['login_user_name'])) {
             self::$valid = true;

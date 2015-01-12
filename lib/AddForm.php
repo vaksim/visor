@@ -22,8 +22,11 @@ class AddForm
 
             if (isset($tplObj['buttons'])) {
                 foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
-
-                    self::$buttons[$buttonValue['name']]['page'] = $buttonValue['page'];
+//Если к в описании кнопки страница не добавлена
+                    if (isset($buttonValue['page']))
+                        {
+                            self::$buttons[$buttonValue['name']]['page'] = $buttonValue['page'];
+                        }
 //                    PageDebug::$varTmp2 = $buttonValue;
                     self::$buttons[$buttonValue['name']]['click'] = false;
                 }
@@ -48,10 +51,11 @@ class AddForm
         foreach(self::$buttons as $key => $arr) {
             if (isset($_POST[$key])) { //В предыдущем сеансе была нажата кнопка
                 self::$buttons[$key]['click'] = true;
-                $arr['page']::prep();
+                if (isset($arr['page'])) {
+                            $arr['page']::prep();
+                        }
             }
         }
-
 
         foreach($className::$vars as $key => $value) {
             if (isset($_POST[$key])) {
@@ -76,7 +80,7 @@ class AddForm
 */
         $className::prepTpl();
         self::$tpl = $className::$tpl;
-        PageDebug::$varTmp = self::$buttons;
+//        PageDebug::$varTmp = self::$buttons;
     }
 
     static public function show()
@@ -88,12 +92,15 @@ class AddForm
         }
         foreach(self::$buttons as $buttonName => $arr) { //Если в предыдущем сеансе
             if ($arr['click']) {
-                self::$buttonName = $buttonName;
-                $arr['page']::prep($divClassPage);   //была нажата какая-то кнопка 
-                $arr['page']::show();   //показываем страницу
+//Если в описании кнопки не указана страница которую она вызвает, тогда просто обновляется форма добавления
+                if (isset($arr['page'])) {
+                    
+                    self::$buttonName = $buttonName;
+                    $arr['page']::prep($divClassPage);   //была нажата какая-то кнопка 
+                    $arr['page']::show();   //показываем страницу
+                }
             }
         }
-
     }
 
     static public function addFormHead()
