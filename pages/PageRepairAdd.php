@@ -18,8 +18,9 @@ class PageRepairAdd extends PageAddForm
         self::$tpl[1]['label'][1] = self::$vars['subdivision_name'];
         self::$tpl[2]['title'][1] = 'Машина:';
         self::$tpl[2]['label'][1] = self::$vars['locomotive_name'];
-        self::$tpl[2]['buttons'][1]['name'] = 'button_locomotive';
-        self::$tpl[2]['buttons'][1]['page'] = 'PageLocomotives';
+        self::$tpl[2]['buttons'][1]['set']['name'] = 'button_locomotive';
+        self::$tpl[2]['buttons'][1]['set']['type'] = 'page';
+        self::$tpl[2]['buttons'][1]['set']['page'] = 'PageLocomotives';
         self::$tpl[2]['buttons'][1]['vars'][1] = 'locomotive_id';
         self::$tpl[2]['buttons'][1]['vars'][2] = 'locomotive_name';
         self::$tpl[2]['buttons'][1]['vars'][3] = 'locomotive_number';
@@ -28,7 +29,7 @@ class PageRepairAdd extends PageAddForm
         self::$tpl['2']['vars']['2'] = 'locomotive_name';
         self::$tpl['2']['vars']['3'] = 'locomotive_number';
 */
-
+/*
         self::$tpl[3]['title'][1] = 'Номер машины:';
         self::$tpl[3]['label'][1] = self::$vars['locomotive_number'];
 
@@ -45,7 +46,7 @@ class PageRepairAdd extends PageAddForm
         self::$tpl[5]['buttons'][1]['page'] = 'Calendar';
         self::$tpl[5]['buttons'][1]['values'][1]['name'] = 'name_value';
         self::$tpl[5]['buttons'][1]['values'][1]['var'] = 'date_ending';
-
+*/
 
 //        self::$tpl[4]['buttons'][1]['hidden'][1]['button'] = self::$tpl[4]['buttons'][1]['name'];
 

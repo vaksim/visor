@@ -21,7 +21,8 @@ class PageLocomotiveAdd extends PageAddForm
 
       self::$tpl[2]['title'][1] = 'Номер машины:';
       self::$tpl[2]['label'][1] = self::$vars['locomotive_number'];
-      self::$tpl[2]['buttons'][1]['name'] = 'button_locomotive_number';
+      self::$tpl[2]['buttons'][1]['set']['name'] = 'button_locomotive_number';
+      self::$tpl[2]['buttons'][1]['set']['type'] = 'string';
     }
 /*    static public function prepButtons()
     {

@@ -15,40 +15,34 @@ foreach(AddForm::$tpl as $tplKey => $tplObj) {
         showTplObj($tplObjType, $tplObj);
     }
 
-
-
-if (isset($tplObj['buttons'])) {
-    foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
-        echo "<td>\n"; ?>
+    if (isset($tplObj['buttons'])) {
+        foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
+            echo "<td>\n"; ?>
 <form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
 <input type="hidden" name="div_class" value="ChildPage">
 <input type="hidden" name="page" value="<?=AddForm::$page?>">
+<?php 
+            if (isset($buttonValue['set'])) {
+                //               foreach($buttonValue['set'] as $setName) { ?>
+<input type="hidden" name="<?=$buttonValue['set']['name']?>" value="--"> 
 <?php
- 
-
-
- //AddForm::addFormHead();
-
-         //_addFormHead();
-        if (isset($buttonValue['values'])) {
-        foreach($buttonValue['values'] as $valueName) { ?>
-		<input type="hidden" name="<?=$valueName['name']?>" value="<?=$valueName['var']?>">
-<?php		 }} 
+//}
+            } 
  /*  echo '1';
 
 /*        if (isset($buttonValue['vars'])) {
         foreach($buttonValue['vars'] as $varName) { ?>
 <input type="hidden" name="<?=$varName?>" value="<?=$varName?>">
 <?php }}*/ ?>
-<input type="submit" name="<?=$buttonValue['name']?>" value="...">
+<input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
 </form>
 <?php
-        echo "</td>\n";
-    }
-} else {
-    echo "<td></td>\n";
-} 
-echo "</tr>\n";
+            echo "</td>\n";
+        }
+    } else {
+        echo "<td></td>\n";
+    } 
+    echo "</tr>\n";
 }
 echo "</table>\n";
 ?>

@@ -2,11 +2,11 @@
 class AddForm
 {
 //    static public $vars = array();
-    static public $buttons = array();
+//    static public $buttons = array();
     static public $tpl = array();
     static public $className = null;
     static public $page = null;
-    static public $buttonName = null; //Имя нажатой кнопки
+//    static public $buttonName = null; //Имя нажатой кнопки
 
     static public function prep($className)
     {
@@ -18,20 +18,28 @@ class AddForm
 //Кнопки
 //        PageDebug::$varTmp2 = 'eeeq';
         $className::prepTpl();
-        foreach($className::$tpl as $tplKey => $tplObj) { 
+/*        foreach($className::$tpl as $tplKey => $tplObj) { 
 
+/*
             if (isset($tplObj['buttons'])) {
                 foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
 //Если к в описании кнопки страница не добавлена
-                    if (isset($buttonValue['page']))
-                        {
-                            self::$buttons[$buttonValue['name']]['page'] = $buttonValue['page'];
+                    if (isset($buttonVAlue['set'])) {
+                        self::$buttons[$buttonValue['name'] = $buttonValue['set']['name'];
+                        if ($buttonValue['set']['type'] === 'page') {
+                            self::$buttons[$buttonValue['name']] = self::$page;
+                            
+foreach ($buttonValue as setName => setValue) {
+                            if ($setValue === '')
+                                {
+
                         }
 //                    PageDebug::$varTmp2 = $buttonValue;
                     self::$buttons[$buttonValue['name']]['click'] = false;
                 }
             }
         }
+*/
 /*
         $className::prepButtons();
         foreach($className::$buttons as $key => $value) {
@@ -48,14 +56,27 @@ class AddForm
             }
         }
 
-        foreach(self::$buttons as $key => $arr) {
-            if (isset($_POST[$key])) { //В предыдущем сеансе была нажата кнопка
-                self::$buttons[$key]['click'] = true;
-                if (isset($arr['page'])) {
-                            $arr['page']::prep();
-                        }
+
+        foreach($className::$tpl as $tplKey => $tplObj) { 
+            if (isset($tplObj['buttons'])) {
+                foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
+                    if ($buttonVAlue['set']) {
+                        if 
+                        
+                    }
+                }
             }
-        }
+
+                    
+
+            foreach(self::$buttons as $key => $arr) {
+                if (isset($_POST[$key])) { //В предыдущем сеансе была нажата кнопка
+                    self::$buttons[$key]['click'] = true;
+                    if (isset($arr['page'])) {
+                        $arr['page']::prep();
+                    }
+                }
+            }
 
         foreach($className::$vars as $key => $value) {
             if (isset($_POST[$key])) {
