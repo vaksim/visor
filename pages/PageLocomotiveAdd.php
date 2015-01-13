@@ -13,8 +13,9 @@ class PageLocomotiveAdd extends PageAddForm
       self::$tpl[1]['title'][1] = 'Наименование машины:';
       self::$tpl[1]['label'][1] = self::$vars['locomotive_name'];
 
-      self::$tpl[1]['buttons'][1]['name'][] = 'button_locomotive_name';
-      self::$tpl[1]['buttons'][1]['type']['page'] = 'PageLocomotiveNames';
+      self::$tpl[1]['buttons'][1]['set']['name'] = 'button_locomotive_name';
+      self::$tpl[1]['buttons'][1]['set']['type'] = 'page';
+      self::$tpl[1]['buttons'][1]['set']['value'] = 'PageLocomotiveNames';
       self::$tpl[1]['buttons'][1]['vars'][1] = 'locomotive_name_id';
       self::$tpl[1]['buttons'][1]['vars'][2] = 'locomotive_name';
 
@@ -32,5 +33,44 @@ class PageLocomotiveAdd extends PageAddForm
         AddForm::prep(get_class());
     }
 
+    static public function echoArr($obj, $gKey = null)
+    {
+        if ((gettype($obj) === 'array')) {
+            if (isset($gKey)) {
+
+                echo '[' . $gKey . '] => ';
+                echo 'Array';// . "<br>\n";
+
+            } else {
+                echo 'Array';// . "<br>\n";
+
+            }
+
+            foreach ($obj as $key => $value) {
+                self::$count= self::$count + 1;
+                self::echoCount(self::$count);
+                self::echoArr($value, $key);
+                self::$count--;
+            }
+        } else {
+
+//            self::echoCount(self::$count);
+            echo '[' . $gKey . '] (' . gettype($gKey) . ') ' . $obj;// . "<br>\n";
+//            self::echoCount(self::$count);
+//            self::$count--;
+        }
+    }
+
+    static public $count = 0;
+    static public $tmp = array ('name' => 'joe', 'sur' => 'kson');
+
+    static public function echoCount($count)
+    {
+        echo "<br>\n";
+
+        for ($i = 0; $i < self::$count; $i++) {
+            echo '----';
+        }
+    }
 }
 ?>
