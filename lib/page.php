@@ -4,7 +4,7 @@ class Page
     static private $_title = '_title';
     static private $_programName = '_programName';
     static private $_authValid = false;
-    static public $pagePref = 'Page';
+//    static public $pagePref = 'Page';
     static public $page = null;
     static public $prevPage = null;
 

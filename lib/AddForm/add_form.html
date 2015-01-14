@@ -1,3 +1,16 @@
+<?php
+/*function showTplObj($tplObjType, $tplObj)
+{
+    if (isset($tplObj[$tplObjType])) {
+        foreach($tplObj[$tplObjType] as $titleNumber => $titleValue) {
+            echo "<td>$titleValue</td>\n";
+        }
+    } else {
+        echo "<td></td>\n";
+    }
+}*/
+?>
+
 <div class="PageRepairAdd">
   <div class="ControlButtons">
   <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
@@ -12,9 +25,9 @@
 foreach(AddForm::$tpl as $tplKey => $tplObj) { 
     echo "<tr>\n";
     foreach($tplObjTypes as $tplObjType) { 
-        showTplObj($tplObjType, $tplObj);
+        AddForm::showTplObj($tplObjType, $tplObj);
     }
-
+    
     if (isset($tplObj['buttons'])) {
         foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
             echo "<td>\n"; ?>
@@ -48,15 +61,3 @@ echo "</table>\n";
 ?>
 </div>
 
-<?php
-function showTplObj($tplObjType, $tplObj)
-{
-    if (isset($tplObj[$tplObjType])) {
-        foreach($tplObj[$tplObjType] as $titleNumber => $titleValue) {
-            echo "<td>$titleValue</td>\n";
-        }
-    } else {
-        echo "<td></td>\n";
-    }
-}
-?>

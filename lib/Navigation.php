@@ -5,13 +5,13 @@ class Navigation
         'Repairs' => array(
             'but_label' => 'Ремонты',
             'vars' => array(
-                'page' => 'Repairs'
+                'page' => 'PageRepairs'
             )
         ),
         'Locomotives' => array(
             'but_label' => 'Машины',
             'vars' => array(
-                'page' => 'Locomotives',
+                'page' => 'PageLocomotives',
                 'div_class' => 'Page'
             )
         )

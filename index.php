@@ -5,7 +5,7 @@
 session_start();
 
 $authValid = false;
-$pagePref = 'Page';
+//$pagePref = 'Page';
 $page = 'Clear';
 
 function userExit() // Если $_GET['exit'] = true то уничтожить сессию и перечитать скрипт
@@ -44,12 +44,12 @@ if (Auth::$valid) {
     if (isset($_POST['page'])) {
         $page = $_POST['page'];
     } else {
-        $page = 'Repairs';
+        $page = 'PageRepairs';
     }
 } elseif (isset($_POST['login_user_name'])) {
-    $page = 'Error';
+    $page = 'PageError';
 } else {
-    $page = 'Begin';
+    $page = 'PageBegin';
 }
 /*
 if (isset($_POST['page'])) {
@@ -57,7 +57,7 @@ if (isset($_POST['page'])) {
 }
 */
 
-$page = Page::$pagePref.$page;
+//$page = Page::$pagePref.$page;
 
 
 

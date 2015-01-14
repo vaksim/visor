@@ -12,7 +12,7 @@ class PageRepairs extends PageTable
     }
 
 //    static public $heads = array();
-    static public $addPage = 'RepairAdd';
+    static public $addPage = 'PageRepairAdd';
 //    static public $data;
 //    static public $vars;
     static public $pageTitle = 'Ремонты';
