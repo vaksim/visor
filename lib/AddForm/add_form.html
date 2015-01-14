@@ -23,11 +23,14 @@ td {
       <input type="submit" name="button_save" value="Сохранить"><br>
 	</form>
   </div>
-  <table class="TableClear">
+<table class="TableClear">
 <?php 
+
      $tplObjTypes = array('title', 'label');
 if (isset(AddForm::$tpl)) {
-    foreach(AddForm::$tpl as $tplKey => $tplObj) { 
+    foreach(AddForm::$tpl as $tplKey => $tplObj) { ?>
+
+<?php
         echo "<tr>\n";
         foreach($tplObjTypes as $tplObjType) { 
             AddForm::showTplObj($tplObjType, $tplObj);
@@ -43,29 +46,45 @@ if (isset(AddForm::$tpl)) {
 <?php 
                 if (isset($buttonValue['set'])) {
                 //               foreach($buttonValue['set'] as $setName) { ?>
-  <input type="hidden" name="<?=$buttonValue['set']['name']?>" value="--"> 
+<!--  <input type="hidden" name="<?=$buttonValue['set']['name']?>" value="--"> -->
 <?php
                 } 
                 if (isset($buttonValue['vars'])) {
-                    foreach($buttonValue['vars'] as $varName => $varValue) { ?>
+?>
+<input type="hidden" name="tpl_number" value="<?=$tplKey?>">
+<input type="hidden" name="tpl_button_number" value="<?=$buttonNumber?>">
 
-  <input type="hidden" name="<?=$varName?>" value="<?=$varValue?>">
+<?php //}
+                }
+?>
+<?php
+                 
+                if (isset($buttonValue['get'])) {
+                    foreach($buttonValue['get'] as $getName => $getValue) { 
+?>
 
-<?php }}
+<input type="hidden" name="<?=$getName?>" value="<?=$getValue?>">
+
+
+
+<?php //}
+                    }}
 
 ?>
   <input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
 </form>
 <?php
-                echo "</td>\n";
-                echo "<tl>\n";
+//                echo "</td>\n";
+//                echo "<td>\n";
+
 ?>
 
-
+<!--
 <form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
   <input type="hidden" name="page" value="<?=AddForm::$page?>">
   <input type="submit" name="" value="<=">
 </form>
+-->
 <?php
         echo '</td>';        
 
@@ -73,10 +92,17 @@ if (isset(AddForm::$tpl)) {
         } else {
             echo "<td></td>\n";
         } 
+        if (isset($tplObj['separator'])) {
+            if ($tplObj['separator'] === 'table') {
+                echo '</tr></table><table><tr>';
+            }
+        }
         echo "</tr>\n";
+
     }
+//if tpl end
 }
-echo "</table>\n";
+echo "</table><br>\n";
 ?>
 </div>
 

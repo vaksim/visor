@@ -127,5 +127,8 @@ class AddForm
             echo "<td></td>\n";
         }
     }
+    static public function separator($type) {
+        ;
+    }
 }
 ?>

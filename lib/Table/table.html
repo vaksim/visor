@@ -13,25 +13,35 @@
      }
      foreach(Table::$heads as $headName => $headValue) {
          echo "<th>$headValue</th>";
-     } ?>
+     } 
+?>
 </tr>
-<?php foreach(Table::$data as $data) { ?>
+<?php 
+foreach(Table::$data as $data) { 
+?>
 <tr onMouseOver="this.style.backgroundColor='#ececec';"
 	  onMouseOut="this.style.backgroundColor='white'">
-	  <?php if (isset(AddForm::$buttonPage)) { ?>
+<?php 
+          if (isset(AddForm::$buttonPage)) { 
+?>
 	  <td>
 <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
   <input type="hidden" name="page" value="<?=Table::$page?>">
 <?php
-   foreach(AddForm::$tpl as $tplKey => $tplObj) {
-      if (isset($tplObj['buttons'])) {
-          foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
-          if (isset($buttonValue['vars'])) {
-            foreach($buttonValue['vars'] as $varName) {
+
+//if (isset($_POST['tpl_number'])) {
+//    foreach(AddForm::$tpl[$_POST['tpl_number']] as $tplKey => $tplObj) {
+//echo 'eeeeeeee';
+if (isset(AddForm::$tpl[$_POST['tpl_number']]['buttons'][$_POST['tpl_button_number']])) {
+//            echo 'bbbbbbbbbbb';
+            foreach(AddForm::$tpl[$_POST['tpl_number']]['buttons'][$_POST['tpl_button_number']]['vars'] as $varNumber => $varValue) { 
+//                if (isset($buttonValue['vars'])) {
+//                    foreach($buttonValue['vars'] as $varName) {
+//                PageDebug::$varTmp = $data;
 ?>
-  <input type="hidden" name="<?=$varName?>" value="<?=$data[$varName]?>">
+  <input type="hidden" name="<?=$varValue?>" value="<?=$data[$varValue]?>">
 		<?php 
-            }}}}}
+                    }}
       ?>
   <input type="submit" name="button_get" value="<=">
 </form>
