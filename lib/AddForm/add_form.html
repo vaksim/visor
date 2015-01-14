@@ -10,7 +10,12 @@
     }
 }*/
 ?>
+<style>
+td {
+  border: 1px solid black;
+}
 
+</style>
 <div class="PageRepairAdd">
   <div class="ControlButtons">
   <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
@@ -21,41 +26,55 @@
   <table class="TableClear">
 <?php 
      $tplObjTypes = array('title', 'label');
+if (isset(AddForm::$tpl)) {
+    foreach(AddForm::$tpl as $tplKey => $tplObj) { 
+        echo "<tr>\n";
+        foreach($tplObjTypes as $tplObjType) { 
+            AddForm::showTplObj($tplObjType, $tplObj);
+        }
 
-foreach(AddForm::$tpl as $tplKey => $tplObj) { 
-    echo "<tr>\n";
-    foreach($tplObjTypes as $tplObjType) { 
-        AddForm::showTplObj($tplObjType, $tplObj);
-    }
-    
-    if (isset($tplObj['buttons'])) {
-        foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
-            echo "<td>\n"; ?>
+
+        if (isset($tplObj['buttons'])) {
+            foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
+                echo "<td>\n"; ?>
 <form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
-<input type="hidden" name="div_class" value="ChildPage">
-<input type="hidden" name="page" value="<?=AddForm::$page?>">
+  <input type="hidden" name="div_class" value="ChildPage">
+  <input type="hidden" name="page" value="<?=AddForm::$page?>">
 <?php 
-            if (isset($buttonValue['set'])) {
+                if (isset($buttonValue['set'])) {
                 //               foreach($buttonValue['set'] as $setName) { ?>
-<input type="hidden" name="<?=$buttonValue['set']['name']?>" value="--"> 
+  <input type="hidden" name="<?=$buttonValue['set']['name']?>" value="--"> 
 <?php
-//}
-            } 
- /*  echo '1';
+                } 
+                if (isset($buttonValue['vars'])) {
+                    foreach($buttonValue['vars'] as $varName => $varValue) { ?>
 
-/*        if (isset($buttonValue['vars'])) {
-        foreach($buttonValue['vars'] as $varName) { ?>
-<input type="hidden" name="<?=$varName?>" value="<?=$varName?>">
-<?php }}*/ ?>
-<input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
+  <input type="hidden" name="<?=$varName?>" value="<?=$varValue?>">
+
+<?php }}
+
+?>
+  <input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
 </form>
 <?php
-            echo "</td>\n";
-        }
-    } else {
-        echo "<td></td>\n";
-    } 
-    echo "</tr>\n";
+                echo "</td>\n";
+                echo "<tl>\n";
+?>
+
+
+<form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+  <input type="hidden" name="page" value="<?=AddForm::$page?>">
+  <input type="submit" name="" value="<=">
+</form>
+<?php
+        echo '</td>';        
+
+            }
+        } else {
+            echo "<td></td>\n";
+        } 
+        echo "</tr>\n";
+    }
 }
 echo "</table>\n";
 ?>

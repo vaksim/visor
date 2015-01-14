@@ -2,7 +2,7 @@
 class AddForm
 {
 //    static public $vars = array();
-    static public $pageButton = null;
+    static public $buttonPage = null;
     static public $tpl = array();
     static public $className = null;
     static public $page = null;
@@ -32,25 +32,41 @@ class AddForm
                 $className::$vars[$key] = $_SESSION[$key];
             }
         }
+        echo '-----<br>';
+        echo '-----<br>';
+        echo '-----<br>';
+        echo '-----<br>';
+        echo '-----<br>';
+        echo '-----<br>';
+        echo '-----<br>';
+        echo '-----<br>';
+        echo '-----<br>';
+
+
+
 //Готовим шаблон
         $className::prepTpl();
         self::$tpl = $className::$tpl;
         foreach($className::$tpl as $tplNameObj => $tplObj) { 
             if (isset($tplObj['buttons'])) {
                 foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
+                    echo $buttonNumber;
                     if (isset($_POST[$buttonValue['set']['name']])) {
+
 //В предыдущем сеансе была нажата кнопка
                         //self::$tpl[$tplNameObj]['buttons'][$buttonNumber]['set']['click'] = true;
-                        
+                            PageDebug::$varTmp2 = $buttonValue;
                         if ($buttonValue['set']['type'] === 'page') {
-                            self::$pageButton = $buttonValue['set']['page'];
-                        } else {
-                            self::$pageButton = self::$page;
-                        }
+//                            PageDebug::$varTmp2 = $buttonValue;
+                            self::$buttonPage = $buttonValue['set']['page'];
+                        } 
+//else {
+//                            self::$buttonPage = self::$buttonPage;
                     }
                 }
             }
         }
+//    }
         
 /*        //Формируем запрос для добавления ремонта
           if (isset($_POST['button_save'])) { 
@@ -66,8 +82,11 @@ class AddForm
 */
 //        $className::prepTpl();
 //        self::$tpl = $className::$tpl;
-        PageDebug::$varTmp = self::$tpl;
-    }
+
+//    if (isset(self::$buttonPage)) {
+        PageDebug::$varTmp = self::$buttonPage;
+//    }
+}
 
     static public function show()
     {
@@ -82,10 +101,12 @@ class AddForm
 //                if (isset($arr['page'])) {
 //                    
 //                    self::$buttonName = $buttonName;
-        $page = self::$page;
-        $page::prep($divClassPage);   //была нажата какая-то кнопка
-//        $page::show();   //показываем страницу
-//                }
+        if (isset(self::$buttonPage)) {
+            $buttonPage = self::$buttonPage;
+            $buttonPage::prep($divClassPage);   //была нажата какая-то кнопка
+//        PageDebug::$varTmp =$page;
+            $buttonPage::show();   //показываем страницу
+        }
 //            }
 //        }
 

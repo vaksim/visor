@@ -15,14 +15,22 @@ class PageLocomotiveAdd extends PageAddForm
 
       self::$tpl[1]['buttons'][1]['set']['name'] = 'button_locomotive_name';
       self::$tpl[1]['buttons'][1]['set']['type'] = 'page';
-      self::$tpl[1]['buttons'][1]['set']['value'] = 'PageLocomotiveNames';
+      self::$tpl[1]['buttons'][1]['set']['page'] = 'PageLocomotiveNames';
       self::$tpl[1]['buttons'][1]['vars'][1] = 'locomotive_name_id';
       self::$tpl[1]['buttons'][1]['vars'][2] = 'locomotive_name';
 
       self::$tpl[2]['title'][1] = 'Номер машины:';
       self::$tpl[2]['label'][1] = self::$vars['locomotive_number'];
       self::$tpl[2]['buttons'][1]['set']['name'] = 'button_locomotive_number';
-      self::$tpl[2]['buttons'][1]['set']['type'] = 'string';
+      self::$tpl[2]['buttons'][1]['set']['type'] = 'text';
+      self::$tpl[2]['text'][1]['set']['name'] = 'text';
+      self::$tpl[2]['text'][1]['buttons'][1]['set']['name'] = 'get_locomotive_namber';
+      self::$tpl[2]['text'][1]['buttons'][1]['set']['name'] = 'get_locomotive_namber';
+      self::$tpl[2]['text'][1]['buttons'][1]['vars']['name'] = 'get_locomotive_namber';
+
+
+['locomotive_number'] = self::$vars['locomotive_number'];
+
     }
 /*    static public function prepButtons()
     {

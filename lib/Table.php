@@ -1,12 +1,12 @@
 <?php
 class Table
 {
-    static public $className = null;
-    static public $heads = array();
-    static public $data = array();
-    static public $page = null;
-    static public $addPage = null;
-    static public $divClassPage = null;
+    static public $className = null;//Имя вызываемого класса
+    static public $heads = array(); //Заголовки таблицы
+    static public $data = array();  //Содержимое таблицы
+    static public $page = null;     //Страница 
+    static public $addPage = null;  //Страница для возврата заполняющей формы
+    static public $divClassPage = null; //В каком контейнере будет отображаться форма
 //    static public $vars = array();
 
 
@@ -33,6 +33,9 @@ class Table
     static public function show()
     {
 //        PageDebug::$varTmp2 = self::$divClassPage;
+//        echo '--';
+//        echo self::$divClassPage;
+
         IncTpl::show('table', get_class(), self::$divClassPage);
     }
 }

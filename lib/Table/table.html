@@ -6,18 +6,19 @@
 </div>
 <table class="Table">
 <tr>
-  <?php //if (isset(AddForm::$buttons['button_locomotive']['click'])) { 
-if (isset(AddForm::$buttonName)) { ?>
-	  <th>Выбор</th>
-	  <?php } ?>
-<?php foreach(Table::$heads as $headName => $headValue) { ?>
-<th><?=$headValue?></th>
-<?php } ?>
+<?php
+     //if (isset(AddForm::$buttons['button_locomotive']['click'])) 
+     if (isset(AddForm::$buttonPage)) {
+         echo '<th>Выбор</th>';
+     }
+     foreach(Table::$heads as $headName => $headValue) {
+         echo "<th>$headValue</th>";
+     } ?>
 </tr>
 <?php foreach(Table::$data as $data) { ?>
 <tr onMouseOver="this.style.backgroundColor='#ececec';"
 	  onMouseOut="this.style.backgroundColor='white'">
-	  <?php if (isset(AddForm::$buttonName)) { ?>
+	  <?php if (isset(AddForm::$buttonPage)) { ?>
 	  <td>
 <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
   <input type="hidden" name="page" value="<?=Table::$page?>">
@@ -28,10 +29,9 @@ if (isset(AddForm::$buttonName)) { ?>
           if (isset($buttonValue['vars'])) {
             foreach($buttonValue['vars'] as $varName) {
 ?>
-		<input type="hidden" name="<?=$varName?>" value="<?=$data[$varName]?>">
+  <input type="hidden" name="<?=$varName?>" value="<?=$data[$varName]?>">
 		<?php 
             }}}}}
-
       ?>
   <input type="submit" name="button_get" value="<=">
 </form>
