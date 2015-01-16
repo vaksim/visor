@@ -26,7 +26,7 @@ td {
 <table class="TableClear">
 <?php 
 
-     $tplObjTypes = array('title', 'label');
+    $tplObjTypes = array('title', 'label');
 if (isset(AddForm::$tpl)) {
     foreach(AddForm::$tpl as $tplKey => $tplObj) { ?>
 
@@ -40,19 +40,19 @@ if (isset(AddForm::$tpl)) {
         if (isset($tplObj['buttons'])) {
             foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
                 echo "<td>\n"; ?>
-<form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
-  <input type="hidden" name="div_class" value="ChildPage">
-  <input type="hidden" name="page" value="<?=AddForm::$page?>">
+                <form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+                <input type="hidden" name="div_class" value="ChildPage">
+                <input type="hidden" name="page" value="<?=AddForm::$page?>">
 <?php 
                 if (isset($buttonValue['set'])) {
-                //               foreach($buttonValue['set'] as $setName) { ?>
-<!--  <input type="hidden" name="<?=$buttonValue['set']['name']?>" value="--"> -->
+                    //               foreach($buttonValue['set'] as $setName) { ?>
+                    <!--  <input type="hidden" name="<?=$buttonValue['set']['name']?>" value="--"> -->
 <?php
                 } 
                 if (isset($buttonValue['vars'])) {
 ?>
-<input type="hidden" name="tpl_number" value="<?=$tplKey?>">
-<input type="hidden" name="tpl_button_number" value="<?=$buttonNumber?>">
+                    <input type="hidden" name="tpl_number" value="<?=$tplKey?>">
+                    <input type="hidden" name="tpl_button_number" value="<?=$buttonNumber?>">
 
 <?php //}
                 }
@@ -63,38 +63,58 @@ if (isset(AddForm::$tpl)) {
                     foreach($buttonValue['get'] as $getName => $getValue) { 
 ?>
 
-<input type="hidden" name="<?=$getName?>" value="<?=$getValue?>">
+                        <input type="hidden" name="<?=$getName?>" value="<?=$getValue?>">
 
 
 
 <?php //}
                     }}
 
+                 
 ?>
-  <input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
-</form>
+
+
+
 <?php
 //                echo "</td>\n";
 //                echo "<td>\n";
 
 ?>
-
-<!--
-<form style="padding-bottom: 5px" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
-  <input type="hidden" name="page" value="<?=AddForm::$page?>">
-  <input type="submit" name="" value="<=">
-</form>
--->
 <?php
-        echo '</td>';        
+                if ((isset(AddForm::$buttonNameClick)) && (AddForm::$buttonNameClick)) {
+                    if (isset($buttonValue['text'])) {
+                        foreach($buttonValue['text'] as $textName => $textValue) { 
+                    
+?>
 
+                            <input type="submit" name="get_button_text_<?=$textName?>" value="<=">
+                            </td>
+                            <td>
+                            <input type="text" name="<?=$textName?>" value="<?=$textValue?>">
+<?php 
+
+
+                                                                         }}
+                } else {
+?>
+                    <input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
+
+<?php
+//        echo '</td>';        
+                }
             }
+        
+            echo '</form>';
+            echo '</td>';
         } else {
             echo "<td></td>\n";
-        } 
+        }
+?>
+
+<?php
         if (isset($tplObj['separator'])) {
             if ($tplObj['separator'] === 'table') {
-                echo '</tr></table><table><tr>';
+                echo '</tr></table><table class="TableClear"><tr>';
             }
         }
         echo "</tr>\n";

@@ -3,6 +3,8 @@ class AddForm
 {
 //    static public $vars = array();
     static public $buttonPage = null;
+    static public $buttonType = null;
+    static public $buttonNameClick = null;
     static public $tpl = array();
     static public $className = null;
     static public $page = null;
@@ -32,18 +34,6 @@ class AddForm
                 $className::$vars[$key] = $_SESSION[$key];
             }
         }
-        echo '-----<br>';
-        echo '-----<br>';
-        echo '-----<br>';
-        echo '-----<br>';
-        echo '-----<br>';
-        echo '-----<br>';
-        echo '-----<br>';
-        echo '-----<br>';
-        echo '-----<br>';
-
-
-
 //Готовим шаблон
         $className::prepTpl();
         self::$tpl = $className::$tpl;
@@ -60,6 +50,9 @@ class AddForm
 //                            PageDebug::$varTmp2 = $buttonValue;
                             self::$buttonPage = $buttonValue['set']['page'];
                         } 
+                            self::$buttonType = $buttonValue['set']['type'];
+                            self::$buttonNameClick = $buttonValue['set']['name'];
+
 //else {
 //                            self::$buttonPage = self::$buttonPage;
                     }
