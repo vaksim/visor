@@ -5,6 +5,7 @@ class AddForm
     static public $buttonPage = null;
     static public $buttonType = null;
     static public $buttonNameClick = null;
+///static public
     static public $tpl = array();
     static public $className = null;
     static public $page = null;
@@ -21,10 +22,25 @@ class AddForm
 //В предыдущем сеансе была нажата кнопка Добавить
 //Значить инициализируем переменные 
         if (isset($_POST['button_new'])) {
-            foreach($className::$vars as $key => $value) {
-                $_SESSION[$key] = $value;
+            $filds = null;
+            $values = null;
+            $sql = null;
+            foreach($className::$vars as $varName => $varValue) {
+                $_SESSION[$varName] = $varValue;
             }
         }
+//Если была нажата кнопка сохранить
+        if (isset($_POST['button_save'])) {
+            foreach($className::$vars as $varName => $varValue) {
+                $filds = $filds  . '\'' . $varName . '\', ';
+                $values = $values . '\'' . $_SESSION[$varName] . '\', ';
+            }
+            $filds = rtrim($filds, ', ');
+            $values = rtrim($filds, ', ');
+            $sql = 'INSERT INTO locomotive_names (' . $filds . ') VALUES (' . $values . ');';
+            PageDebug::$varTmp = $sql;
+        }
+
 //Проверяем переменные
         foreach($className::$vars as $key => $value) {
             if (isset($_POST[$key])) {
@@ -37,24 +53,28 @@ class AddForm
 //Готовим шаблон
         $className::prepTpl();
         self::$tpl = $className::$tpl;
-        foreach($className::$tpl as $tplNameObj => $tplObj) { 
+//        foreach($className::$tpl as $tplNameObj => $tplObj) { 
+        foreach(self::$tpl as $tplNameObj => $tplObj) {
             if (isset($tplObj['buttons'])) {
                 foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
                     echo $buttonNumber;
                     if (isset($_POST[$buttonValue['set']['name']])) {
-
 //В предыдущем сеансе была нажата кнопка
+
+
                         //self::$tpl[$tplNameObj]['buttons'][$buttonNumber]['set']['click'] = true;
-                            PageDebug::$varTmp2 = $buttonValue;
+//                            PageDebug::$varTmp2 = $buttonValue;
                         if ($buttonValue['set']['type'] === 'page') {
 //                            PageDebug::$varTmp2 = $buttonValue;
                             self::$buttonPage = $buttonValue['set']['page'];
                         } 
                             self::$buttonType = $buttonValue['set']['type'];
                             self::$buttonNameClick = $buttonValue['set']['name'];
+//                            self::$buttonLabel = '<=';
 
 //else {
 //                            self::$buttonPage = self::$buttonPage;
+
                     }
                 }
             }
@@ -77,7 +97,7 @@ class AddForm
 //        self::$tpl = $className::$tpl;
 
 //    if (isset(self::$buttonPage)) {
-        PageDebug::$varTmp = self::$buttonPage;
+//        PageDebug::$varTmp = self::$page;
 //    }
 }
 

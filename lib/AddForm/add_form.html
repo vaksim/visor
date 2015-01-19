@@ -36,7 +36,6 @@ if (isset(AddForm::$tpl)) {
             AddForm::showTplObj($tplObjType, $tplObj);
         }
 
-
         if (isset($tplObj['buttons'])) {
             foreach($tplObj['buttons'] as $buttonNumber => $buttonValue) { 
                 echo "<td>\n"; ?>
@@ -58,52 +57,44 @@ if (isset(AddForm::$tpl)) {
                 }
 ?>
 <?php
-                 
                 if (isset($buttonValue['get'])) {
                     foreach($buttonValue['get'] as $getName => $getValue) { 
 ?>
-
                         <input type="hidden" name="<?=$getName?>" value="<?=$getValue?>">
-
-
-
 <?php //}
                     }}
-
-                 
 ?>
-
-
-
 <?php
 //                echo "</td>\n";
 //                echo "<td>\n";
-
 ?>
 <?php
-                if ((isset(AddForm::$buttonNameClick)) && (AddForm::$buttonNameClick)) {
-                    if (isset($buttonValue['text'])) {
-                        foreach($buttonValue['text'] as $textName => $textValue) { 
-                    
+//                if (isset($_POST[$buttonValue['set']['name']])) {
+
+
+                if ($buttonValue['set']['type'] === 'page') {
 ?>
-
-                            <input type="submit" name="get_button_text_<?=$textName?>" value="<=">
-                            </td>
-                            <td>
-                            <input type="text" name="<?=$textName?>" value="<?=$textValue?>">
-<?php 
-
-
-                                                                         }}
+<input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
+<?php
                 } else {
+                    if ((isset(AddForm::$buttonNameClick)) && (AddForm::$buttonNameClick === $buttonValue['set']['name'])) {
+                        if (isset($buttonValue['text'])) {
+                            foreach($buttonValue['text'] as $textName => $textValue) { 
 ?>
-                    <input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
-
+<input type="submit" name="get_button_text_<?=$textName?>" value="<=">
+</td>
+<td>
+<input type="text" name="<?=$textName?>" value="<?=$textValue?>">
+<?php 
+                            }
+                        }
+                    } else {
+?>
+<input type="submit" name="<?=$buttonValue['set']['name']?>" value="...">
 <?php
-//        echo '</td>';        
+                    }
                 }
             }
-        
             echo '</form>';
             echo '</td>';
         } else {

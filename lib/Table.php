@@ -5,7 +5,7 @@ class Table
     static public $heads = array(); //Заголовки таблицы
     static public $data = array();  //Содержимое таблицы
     static public $page = null;     //Страница 
-    static public $addPage = null;  //Страница для возврата заполняющей формы
+    static public $addPage = null;  //Страница формы добавления
     static public $divClassPage = null; //В каком контейнере будет отображаться форма
 //    static public $vars = array();
 
@@ -13,8 +13,8 @@ class Table
     static public function prep($className, $divClassPage = null)
 
     {
-        self::$className = $className;
-        self::$divClassPage = $divClassPage;
+        self::$className = $className;          //Сохраняем себе имя вызывающего класса
+        self::$divClassPage = $divClassPage;    //Контейнер в котором будет отображена
         if (isset($_POST['page'])) {
             self::$page = $_POST['page'];
         }
@@ -26,7 +26,7 @@ class Table
         self::$data = $className::$data;
         //      self::$vars = $className::$vars;
 //        PageDebug::$varTmp = self::$page;
-        //      PageDebug::$varTmp2 = self::$addPage;
+              PageDebug::$varTmp2 = self::$addPage;
 
 
     }

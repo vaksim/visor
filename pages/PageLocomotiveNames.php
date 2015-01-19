@@ -1,7 +1,7 @@
 <?php
 class PageLocomotiveNames extends PageTable
 {
-    static public $addPage = 'LocomotiveNameAdd';
+    static public $addPage = 'PageLocomotiveNameAdd';   //Страница формы добавления
     static public $pageTitle = 'Добавление наименования машины';
     static public $divClassPage = 'ChildPage';
     static public $sql = 'SELECT row_number() OVER() AS row_number, locomotive_names.id AS locomotive_name_id, locomotive_names.name AS locomotive_name FROM locomotive_names;';
