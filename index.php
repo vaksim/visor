@@ -1,11 +1,8 @@
 <?php
 
-//init_set('session.use_cookies', 1);
-//init_set('session.use_only_cooke',1);
 session_start();
 
 $authValid = false;
-//$pagePref = 'Page';
 $page = 'Clear';
 
 function userExit() // Если $_GET['exit'] = true то уничтожить сессию и перечитать скрипт
@@ -51,45 +48,16 @@ if (Auth::$valid) {
 } else {
     $page = 'PageBegin';
 }
-/*
-if (isset($_POST['page'])) {
-    $page = $_POST['page'];
-}
-*/
-
-//$page = Page::$pagePref.$page;
 
 
+Page::prep($page);
 
-//$page = $pagePref.$page;
-//echo '1111111111111';
-//Page::setTitle(_PROGRAM_SHORT_NAME);
-//Page::setProgramName(_PROGRAM_NAME);
-Page::showHead($page);
-Page::showBodyStart();
-ProgramTitle::show();
-UserMenu::show(Auth::$valid);
-if (Auth::$valid) {
-    Navigation::show();
-}
-//Page::showBodyPage($page);
-//$bodyPage =  new $page;
 echo '<div class="Page">' . "\n";
-//echo $page;
+
 Page::show($page);
-//$page::show();
+
 echo '</div>' . "\n";
-//PageDebug::prep('page', $page);
-//PageDebug::prep('page1111', $page);
-//PageDebug::show();
 
 Page::showBodyFinish();
-//$page = new Page();
-//$page->setTitle(_PROGRAM_SHORT_NAME);
-//$page->setProgramName(_PROGRAM_NAME);
-//$page->showHead();
-//$page->ShowBody("main");
-//$Page->foot();
 
-//echo '</html>' . "\n";
 ?>

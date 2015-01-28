@@ -1,23 +1,36 @@
 <?php
 class PageRepairAdd extends PageAddForm
 {
+    static public $idPageData = array(
+        'id' => 1,
+        'title' => 'Создание ремонта',
+        'pageName' => 'PageRepairAdd'
+    );
+
     static public function prepVars()
     {
-        self::$vars['subdivision_id'] = 1;
-        self::$vars['subdivision_name'] ='Черепаново';
-        self::$vars['locomotive_id'] = null;
-        self::$vars['locomotive_name'] = null;
-        self::$vars['locomotive_number'] = null;
-        self::$vars['date_beginning'] = null;
-        self::$vars['date_ending'] = null;
+        self::$vars['subdivision_id']['value'] = null;
+//        self::$vars[1]['field'] = '';
+        self::$vars['subdivision_name']['value'] = 'Черепаново';
+//        self::$vars[2]['field'] = '';
+        self::$vars['locomotive_id']['value'] = null;
+//        self::$vars[3]['field'] = '';
+        self::$vars['locomotive_name']['value'] = null;
+//        self::$vars[4]['field'] = '';
+        self::$vars['locomotive_number']['value'] = null;
+//        self::$vars[5]['field'] = '';
+        self::$vars['date_beginning']['value'] = null;
+//        self::$vars[6]['field'] = '';
+        self::$vars['date_ending']['value'] = null;
+//        self::$vars[7]['field'] = '';
     }
 
     static public function prepTpl()
     {
         self::$tpl[1]['title'][1] = 'Подразделение:';
-        self::$tpl[1]['label'][1] = self::$vars['subdivision_name'];
+        self::$tpl[1]['label'][1] = self::$vars['subdivision_name']['value'];
         self::$tpl[2]['title'][1] = 'Машина:';
-        self::$tpl[2]['label'][1] = self::$vars['locomotive_name'];
+        self::$tpl[2]['label'][1] = self::$vars['locomotive_name']['value'];
         self::$tpl[2]['buttons'][1]['set']['name'] = 'button_locomotive';
         self::$tpl[2]['buttons'][1]['set']['type'] = 'page';
         self::$tpl[2]['buttons'][1]['set']['page'] = 'PageLocomotives';
@@ -26,11 +39,11 @@ class PageRepairAdd extends PageAddForm
         self::$tpl[2]['buttons'][1]['vars'][3] = 'locomotive_number';
 
         self::$tpl[3]['title'][1] = 'Номер машины:';
-        self::$tpl[3]['label'][1] = self::$vars['locomotive_number'];
+        self::$tpl[3]['label'][1] = self::$vars['locomotive_number']['value'];
         self::$tpl[3]['separator'] = 'table';
 
         self::$tpl[4]['title'][1] = 'Дата начала ремонта:';
-        self::$tpl[4]['label'][1] = self::$vars['date_beginning'];
+        self::$tpl[4]['label'][1] = self::$vars['date_beginning']['value'];
         self::$tpl[4]['buttons'][1]['set']['name'] = 'button_date_beginning';
         self::$tpl[4]['buttons'][1]['set']['type'] = 'page';
         self::$tpl[4]['buttons'][1]['set']['page'] = 'Calendar';
@@ -38,7 +51,7 @@ class PageRepairAdd extends PageAddForm
 //        self::$tpl[4]['buttons'][1]['get_vars'][1]['var'] = 'date_beginning';
 
         self::$tpl[5]['title'][1] = 'Дата окончания ремонта:';
-        self::$tpl[5]['label'][1] = self::$vars['date_ending'];
+        self::$tpl[5]['label'][1] = self::$vars['date_ending']['value'];
         self::$tpl[5]['buttons'][1]['set']['name'] = 'button_date_ending';
         self::$tpl[5]['buttons'][1]['set']['type'] = 'page';
         self::$tpl[5]['buttons'][1]['set']['page'] = 'Calendar';
@@ -59,7 +72,7 @@ class PageRepairAdd extends PageAddForm
         self::$tpl['5']['button']['name'] = 'button_date_ending';
         self::$tpl['5']['button']['page'] = 'Calendar';
 
-//        self::$tpl['5']['button'] = 'button_date_ending';
+pd//        self::$tpl['5']['button'] = 'button_date_ending';
         self::$tpl['5']['hidden']['name_value'] = 'date_ending';
         self::$tpl['5']['hidden']['button'] = self::$tpl['5']['button'];
 */

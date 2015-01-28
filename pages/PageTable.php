@@ -3,6 +3,9 @@ class PageTable
 {
     static public $heads = array();
     static public $data = array();
+    static public $addPage = null;
+//    static public $pageTitle = null;
+    static public $sql = null; 
 
     static public function prepHeads()
     {

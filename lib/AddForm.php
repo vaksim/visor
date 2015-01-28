@@ -20,34 +20,37 @@ class AddForm
         $className::prepVars();
 
 //В предыдущем сеансе была нажата кнопка Добавить
-//Значить инициализируем переменные 
+//Значить инициализируем переменные в сессии
         if (isset($_POST['button_new'])) {
-            $filds = null;
-            $values = null;
             $sql = null;
-            foreach($className::$vars as $varName => $varValue) {
-                $_SESSION[$varName] = $varValue;
+            foreach($className::$vars as $varName => $varData) {
+                $_SESSION[$varName] = $varData['value'];
             }
         }
 //Если была нажата кнопка сохранить
         if (isset($_POST['button_save'])) {
-            foreach($className::$vars as $varName => $varValue) {
-                $filds = $filds  . '\'' . $varName . '\', ';
+            $fields = null;
+            $values = null;
+            $tableName = $className::$tableName;
+            foreach($className::$vars as $varName => $varData) {
+                $fields = $fields  . $varData['field'] . ', ';
                 $values = $values . '\'' . $_SESSION[$varName] . '\', ';
             }
-            $filds = rtrim($filds, ', ');
-            $values = rtrim($filds, ', ');
-            $sql = 'INSERT INTO locomotive_names (' . $filds . ') VALUES (' . $values . ');';
+            $fields = rtrim($fields, ', ');
+            $values = rtrim($values, ', ');
+            $sql = 'INSERT INTO ' . $tableName  . ' (' . $fields . ') VALUES (' . $values . ');';
+            DB::query($sql);
             PageDebug::$varTmp = $sql;
+//            PageDebug::$varTmp = ;
         }
 
 //Проверяем переменные
-        foreach($className::$vars as $key => $value) {
-            if (isset($_POST[$key])) {
-                $className::$vars[$key] = $_POST[$key];
-                $_SESSION[$key] = $className::$vars[$key];
+        foreach($className::$vars as $varName => $varData) {
+            if (isset($_POST[$varName])) {
+                $className::$vars[$varName]['value'] = $_POST[$varName];
+                $_SESSION[$varName] = $className::$vars[$varName]['value'];
             } else {
-                $className::$vars[$key] = $_SESSION[$key];
+                $className::$vars[$varName]['value'] = $_SESSION[$varName];
             }
         }
 //Готовим шаблон

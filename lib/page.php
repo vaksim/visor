@@ -1,12 +1,12 @@
 <?php
 class Page
 {
-    static private $_title = '_title';
+    static public $title = '_title';
     static private $_programName = '_programName';
     static private $_authValid = false;
-//    static public $pagePref = 'Page';
     static public $page = null;
     static public $prevPage = null;
+    static public $idPageData = array();
 
 
     private function __construct(){}
@@ -15,18 +15,13 @@ class Page
     static public function setTitle($title = null)
     {
         if (isset($title)) {
-            self::$_title = SC::show('_PROGRAM_SHORT_NAME') . ' - ' . $title;
+//            self::$_title = SC::show('_PROGRAM_SHORT_NAME') . ' - ' . $title;
+            self::$title = SC::show('_PROGRAM_SHORT_NAME') . ' - ' . $title;
         } else {
             self::$_title = SC::show('_PROGRAM_SHORT_NAME');
         }
     }
 
-    static public function getTitle()
-    {
-        return self::$_title;
-    }
-//    static public function setT
-    
     static public function showHead($page) {
         if (property_exists($page, 'pageTitle')) {
             self::setTitle($page::$pageTitle);
@@ -34,19 +29,27 @@ class Page
             self::setTitle();
         }
         IncTpl::show('head');
-//        SC::show('_SSSS');
-/*
-        echo '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">',"\n";
-        echo '<html>',"\n";
-        echo '<head>',"\n";
-        echo ' <meta',"\n";
-        echo '  content="text/html; charset=utf-8"',"\n";
-        echo '  http-equiv="content-type">',"\n";
-        echo ' <title>'.self::$_title.'</title>',"\n";
-        echo " <link rel=\"stylesheet\" type=\"text/css\" href=\"main.css\">\n";
-        echo '</head>',"\n";
-*/
+    }
 
+    static public function prep($page)
+    {
+
+//Берем данные о странице в базе
+        $sql = 'SELECT * FROM pages WHERE pages.name = \'' . $page . '\';';
+        DB::setQuery($sql);
+        DB::query($sql);
+        self::$idPageData = pg_fetch_array(DB::getResult());
+
+
+
+        self::showHead($page);
+        self::showBodyStart();
+//        ProgramTitle::show();
+        UserMenu::show(Auth::$valid);
+        if (Auth::$valid) {
+            Navigation::prep($page);
+            Navigation::show($page);
+        }
     }
 
     static public function show($page = null)
@@ -87,10 +90,6 @@ class Page
     {
         self::setPrevPageFromSession();
         echo '<body bgcolor="#EDDE7D">',"\n";
-//        echo self::$prevPage;
-//        echo '<br>'.$_SESSION['viewNum'].'<br>';        
-//        self::showBodyHead();
-//        echo '--------------' . self::$prevPage;
     }
 
     static public function showBodyPage($page = null)
@@ -102,25 +101,7 @@ class Page
         self::setPrevPageToSession();
         PageDebug::show();
         echo "\n" . '</body>' . "\n" . '</html>' . "\n";
-
     }
-
-    static private function _getFirstView()
-    {
-        //return $this->$_firstView;
-    }
-   
-    static private function _authError()
-    {
-        echo '<h2 align="center">'._AUTH_ERROR_TEXT.'</h2>';
-    }
-
-    static private function authValid()
-    {
-        self::userMenu();        
-        echo 'Вы вошли как: '.$_SESSION['loginUserName'].'<br>';
-    }
-
 
     static public function setPrevPageToSession()
     {

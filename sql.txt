@@ -33,3 +33,11 @@ DELETE FROM repair_add WHERE user_id = '1';
 
 //Добавляет дополнительную колонку в таблицу
 ALTER TABLE repairs ADD COLUMN open bool NOT NULL DEFAULT true;
+
+
+//Создание таблицы
+ CREATE TABLE pages (
+       id integer UNIQUE, 
+	   name text NOT NULL,
+	   title text, 
+	   CONSTRAINT pages_id_pkey PRIMARY KEY (id));

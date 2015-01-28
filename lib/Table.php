@@ -1,4 +1,5 @@
 <?php
+
 class Table
 {
     static public $className = null;//Имя вызываемого класса

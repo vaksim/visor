@@ -1,0 +1,41 @@
+<div class="Navigation">
+  <table>
+    <tr>
+<?php
+     foreach(Navigation::$arrNavigation as $key => $data) {
+?>
+      <td>
+        <form method="POST" id="<?=$key?>" action="<?=$_SERVER['PHP_SELF']?>">
+<?php
+foreach($data['vars'] as $key_vars => $value) {
+?>
+          <input form="<?=$key?>" type="hidden" name="<?=$key_vars?>" value="<?=$value?>">
+<?php
+}
+?>
+          <input form="<?=$key?>" type="submit" name="navigation_clear" value="<?=$data['but_label']?>">
+        </form>
+      </td>
+<?php
+}
+?>
+      <td>
+<?php
+if (isset(Navigation::$data)) {
+    reset(Navigation::$data);
+
+    foreach (Navigation::$data as $data) {
+        echo $data['title'];
+        echo ' > ';
+    }
+
+} else {
+//    array_push($data, Navigation::$idPageData);
+}
+echo '</td><td style="background:#EFEFEF">';
+echo Navigation::$idPageData['title'];
+?>
+      </td>
+    </tr>
+  </table>
+</div>
