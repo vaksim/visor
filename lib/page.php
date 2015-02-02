@@ -18,7 +18,7 @@ class Page
 //            self::$_title = SC::show('_PROGRAM_SHORT_NAME') . ' - ' . $title;
             self::$title = SC::show('_PROGRAM_SHORT_NAME') . ' - ' . $title;
         } else {
-            self::$_title = SC::show('_PROGRAM_SHORT_NAME');
+            self::$title = SC::show('_PROGRAM_SHORT_NAME');
         }
     }
 

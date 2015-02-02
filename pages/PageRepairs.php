@@ -1,7 +1,7 @@
 <?php
 class PageRepairs extends PageTable
 {
-    static public $id = 1;
+//    static public $id = 1;
 /*PageData = array(
         'id' => 1,
         'title' => 'Ремонты',

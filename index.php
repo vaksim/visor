@@ -33,7 +33,7 @@ function __autoload($className)
 
 
 //self::showMenu();
-DB::connect( "localhost", "visor", "visor", "123");
+DB::connect("localhost", "visor", "visor", "123");
 Auth::authValid();
 
 if (Auth::$valid) {
